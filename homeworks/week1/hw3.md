@@ -87,7 +87,7 @@ Download/             Personal/    Recovery/                     英文/
 Front-end-engineer/   pic/        'System Volume Information'/
 ```
 
-確認一下是你熟悉的那個 D 槽就沒問題了。
+用 `ls` 確認一下是你熟悉的那個 D 槽就沒問題了。
 
 接著我們要來建立資料夾，請你用 `mkdir` 來建立：
 
@@ -123,6 +123,8 @@ touch afu.js
 ls
 afu.js
 ```
+
+`touch` 原本的用途是「改變檔案的最後修改時間」，因為就感覺很像「碰一下」的意思，所以才叫 touch。不過如果你讓它去碰一個不存在的檔案，它就會自動幫你建立新檔案，所以大家就都習慣用這種方式來建立新檔案了。
 
 ### 額外挑戰
 
