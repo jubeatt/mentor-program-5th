@@ -1,6 +1,6 @@
 ## 跟你朋友介紹 Git
 
-菜哥，因為你不是要當工程師，所以我就不跟你講太多背後的細節了。不過我跟保證，在你學完後你絕對可以讓你的每個版本的冷笑話都保存起來，而且你隨時都可以切換到你想要的版本。
+菜哥，因為你不是要當工程師，所以我就不跟你講太多 Git 背後的細節了。不過我跟保證，在你學完後你絕對可以讓你的每個版本的冷笑話都保存起來，而且你隨時都可以切換到你想要的版本。
 
 如果你怕記不起來也沒關係，只要你想用 Git 時，隨時打開這篇文章來看就馬上又懂了。
 
@@ -74,7 +74,7 @@ git add joke.txt
 
 菜哥應該注意到了吧？現在 joke.txt 變成綠色的了，代表 Git 現在已經幫我們控制這個檔案了！
 
-但是還沒結束，Git 這個人做事非常謹慎，所以就算它答應幫你控制這個檔案，你還需要一個步驟來跟他做「最後的確認」。
+但是還沒結束，Git 這個人做事非常謹慎，就算它答應幫你控制這個檔案，你還是需要再做一件事來跟他做「最後的確認」。
 
 跟 Git 做最後確認的指令是 `git commit -m`，為了方便理解，我就直接操作給菜哥看吧：
 
@@ -127,6 +127,44 @@ OK，學到這裡其實就差不多了，所以幫菜哥複習一下流程：
 3. 用 `git commit -m '版本訊息'` 來跟 Git 做最後確認，還有我們想儲存的訊息
 4. 用 `git log` 來查看 Git 幫我們儲存的版本
 
+### 說好的切換版本呢？
+
+我...我沒有忘啦，只是正好剛要教你而已！
+
+我們不是有說過 `git log` 可以看到每個版本的「編號」嗎？
+
+對，就是你想的那樣子，我們只要用那個編號來做切換就可以了：
+
+```bash
+git checkout 74a2fc2ffa76366b0b44c4c525860c1358ddebae
+
+Note: switching to '74a2fc2ffa76366b0b44c4c525860c1358ddebae'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 74a2fc2 菜哥的第1個冷笑話
+
+```
+
+其實重點只有：`Note: switching to '74a2fc2ffa76366b0b44c4c525860c1358ddebae'.` 這句。看到這句就代表你切換成功囉！
+
+如果要切換成其他的版本也是用同樣的方法就可以了。
+
+### 留給菜哥的參考文章
+
 針對菜哥的用途來說，這些指令應該就很夠用了，如果菜哥了解關於 Git 的更多細節的話，可以參考我做的筆記：
 
 - [Git 指令](https://jubeatt.github.io/2021/12/13/git-instruction/)
@@ -151,7 +189,7 @@ OK，學到這裡其實就差不多了，所以幫菜哥複習一下流程：
 
    請用 `git restore 檔案名稱` 就可以囉
 
-4. 我不小心 commit 了，還可以後悔嗎？
-   `git reset HEAD^ --hard`，我剛剛發的 commit 跟做的東西我全都不要了。
-   `git reset HEAD^ --soft`，我只是收回 commit，但我內容還要留著。
+4. 我不小心 commit 了，還可以後悔嗎？  
+   `git reset HEAD^ --hard`，我剛剛發的 commit 跟做的東西我全都不要了。  
+   `git reset HEAD^ --soft`，我只是收回 commit，但我內容還要留著。  
    `git reset HEAD^ --mixed`，跟 –soft 的效果一樣，差別只在於 –mixed 會退回到 Untracked 的狀態。
