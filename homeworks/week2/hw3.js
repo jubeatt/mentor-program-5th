@@ -5,7 +5,7 @@ function reverse(str) {
     result += str[i]
     i-- 
   }
-  return result
+  console.log(result)
 }
 
-console.log(reverse('1abc2'))
+reverse('1abc2')

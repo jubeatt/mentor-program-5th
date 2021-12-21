@@ -1,5 +1,4 @@
 function capitalize(str) {
-  var result = ''
   var tempArray = str.split('')
   var firstLetter = tempArray[0]
   var isCorrectLetter = checkSheet(firstLetter)
@@ -7,12 +6,10 @@ function capitalize(str) {
   if(!isCorrectLetter) return str
   
   if(firstLetter>='a' && firstLetter<='z') {
-    tempArray[0] = toUpperCase(firstLetter)
-    result = transformToString(tempArray)
-    return result
+    tempArray[0] = upperCaseMap(firstLetter)
+    return transformToString(tempArray)
   } else {
-    result = transformToString(tempArray)
-    return result
+    return transformToString(tempArray)
   }
 }
 function checkSheet(char) {
@@ -22,7 +19,7 @@ function checkSheet(char) {
     return false
   }
 }
-function toUpperCase(key) {
+function upperCaseMap(key) {
   var map = {
     a: 'A', b: 'B', c: 'C',
     d: 'E', e: 'E', f: 'F',
@@ -37,11 +34,11 @@ function toUpperCase(key) {
   return map[key]
 }
 function transformToString(arr) {
-  var result = ''
+  var str = ''
   for(var i=0; i<arr.length; i++) {
-    result += arr[i]
+    str += arr[i]
   }
-  return result
+  return str
 }
 
 console.log(capitalize(',hello'))
