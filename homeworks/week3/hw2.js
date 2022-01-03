@@ -4,9 +4,7 @@ function solve(lines) {
   let start = Number(l[0])
   let end = Number(l[1])
   for(let i=start; i<=end; i++) {
-    if(isNString(i)) {
-      console.log(i)
-    }
+    if(isNString(i)) console.log(i)
   }
 }
 // 解法一（數學版）

@@ -1,28 +1,20 @@
 // 函式結構寫法
 function solve(lines) {
   // 建立數字陣列
-  let numberArray = transToNumber(lines.slice(1))
+  let numberArray = lines.slice(1).map(elem => elem * 1)
   // 遍歷所有數字
   numberArray.forEach((elem) => {
-    // 判斷是否為質數
-    let message = isPrime(elem) ? 'Prime' : 'Composite'
     // 印出輸出訊息
-    console.log(message)
+    console.log(isPrime(elem) ? 'Prime' : 'Composite')
   })
-}
-// 陣列轉換成 Number
-function transToNumber (array) {
-  let result = []
-  for(let i=0; i<array.length; i++) {
-    result.push(Number(array[i]))
-  }
-  return result
 }
 function isPrime (number) {
   // edge case: 數字 1 不算質數
   if(number === 1) return false
+  // 儲存開根號後的值
+  const sqrtNum = Math.sqrt(number)
   // 遍歷 2 ~ n-1
-  for(let i=2; i<number; i++) {
+  for(let i=2; i<=sqrtNum; i++) {
     // 可以整除就代表不是質數
     if( number%i === 0 ) return false
   }
@@ -34,7 +26,7 @@ function isPrime (number) {
 // 雙層迴圈寫法
 function solve(lines) {
   // 建立數字陣列
-  let numberArray = transToNumber(lines.slice(1))
+  let numberArray = lines.slice(1).map(elem => elem * 1)
   // 遍歷所有數字
   for(let i=0; i<numberArray.length; i++) {
     // 預設為質數
@@ -43,18 +35,16 @@ function solve(lines) {
     if(numberArray[i] === 1) {
       isPrime = false
     }
+    // 儲存開根號後的值
+    const sqrtNum = Math.sqrt(numberArray[i])
     // 判斷質數
-    for(let j=2; j<numberArray[i]; j++) {
+    for(let j=2; j<=sqrtNum; j++) {
       if(numberArray[i] % j === 0) {
         isPrime = false
         break
       }
     }
     // 印出結果
-    if(isPrime) {
-      console.log('Prime')
-    } else {
-      console.log('Composite')
-    }
+    console.log(isPrime ? 'Prime' : 'Composite') 
   }
 }

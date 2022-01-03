@@ -1,14 +1,11 @@
+// 解法一 => 一般解法
 function solve(lines) {
   // 輸入規則：0 ~ 100個連續英文字母（大小寫）
   const isValidInput = /^[a-zA-Z]{1,100}$/.test(lines[0])
   // 判斷輸入是否合法
   if( !(isValidInput) ) return false
   // 判斷迴文
-  if(isPalindrome(lines[0])) {
-    console.log('True')
-  } else {
-    console.log('False')
-  }
+  console.log(isPalindrome(lines[0]) ? 'True' : 'False')
 }
 function isPalindrome(str) {
   // 若頭尾字元不同，可直接回傳 false
@@ -21,4 +18,17 @@ function isPalindrome(str) {
   }
   // 回傳結果
   return temp === str
+}
+
+// 解法二 => 帥氣解法
+function solve(lines) {
+  // 輸入規則：0 ~ 100個連續英文字母（大小寫）
+  const isValidInput = /^[a-zA-Z]{1,100}$/.test(lines[0])
+  // 判斷輸入是否合法
+  if( !(isValidInput) ) return false
+  // 判斷迴文
+  console.log(isPalindrome(lines[0]) ? 'True' : 'False')
+}
+function isPalindrome(str) {
+  return str === str.split('').reverse().join('')
 }
