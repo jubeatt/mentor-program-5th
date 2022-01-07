@@ -11,8 +11,15 @@ request(url, function (error, response, body) {
   if(error) {
     console.log('oops!, some error just happened.')
   }
-  // 解析為 JavaScript 格式
-  const books = JSON.parse(body)
+  let books
+
+  try {
+    // 解析為 JavaScript 格式
+    books = JSON.parse(body)
+  } catch (error) {
+    console.log(error)
+    return
+  }
   // 印出編號 + 書名
   books.forEach(elem => console.log(elem.id, elem.name))
 })
