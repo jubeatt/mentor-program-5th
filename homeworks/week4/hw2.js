@@ -37,11 +37,17 @@ function listBooks() {
       console.log(error)
     }
     // 檢查狀態碼
-    if(response.statusCode>=200 && response.statusCode<400) {
-      // 解析為 JavaScript 格式
-      const books = JSON.parse(body)
-      // 印出編號 + 書名
-      books.forEach(elem => console.log(elem.id, elem.name))
+    if(response.statusCode>=200 && response.statusCode<300) {
+      try {
+        // 解析為 JavaScript 格式
+        const books = JSON.parse(body)
+        // 印出編號 + 書名
+        books.forEach(elem => console.log(elem.id, elem.name))
+      } catch (error) {
+        console.log('出錯啦')
+        console.log(error)
+        return
+      }
     } else {
       console.log('statusCode: ',response.statusCode)
       console.log('取得失敗')
@@ -56,11 +62,16 @@ function readBook(id) {
       console.log(error)
     }
     // 檢查狀態碼
-    if(response.statusCode>=200 && response.statusCode<400) {
-      // 解析為 JavaScript 格式
-      const {id, name} = JSON.parse(body)
-      // 印出編號 + 書名
-      console.log(id, name)
+    if(response.statusCode>=200 && response.statusCode<300) {
+      try {
+        // 解析為 JavaScript 格式
+        const {id, name} = JSON.parse(body)
+        // 印出編號 + 書名
+        console.log(id, name)
+      } catch (error) {
+        console.log('出錯啦')
+        console.log(error)
+      }
     } else {
       console.log('statusCode: ',response.statusCode)
       console.log('取得失敗')
@@ -75,7 +86,7 @@ function deleteBook(id) {
       console.log(error)
     }
     // 檢查狀態碼
-    if(response.statusCode>=200 && response.statusCode<400) {
+    if(response.statusCode>=200 && response.statusCode<300) {
       // 成功訊息
       console.log('刪除成功')
       // 狀態碼
@@ -102,7 +113,7 @@ function createBook(name) {
       console.log(error)
     }
     // 檢查狀態碼
-    if(response.statusCode>=200 && response.statusCode<400) {
+    if(response.statusCode>=200 && response.statusCode<300) {
       // 成功訊息
       console.log('新增成功！')
       // 顯示狀態碼
@@ -130,7 +141,7 @@ function updateBook(id, name) {
       console.log(error)
     }
     // 檢查狀態碼
-    if(response.statusCode>=200 && response.statusCode<400) {
+    if(response.statusCode>=200 && response.statusCode<300) {
       // 成功訊息
       console.log('修改成功！')
       // 顯示狀態碼

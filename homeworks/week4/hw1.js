@@ -12,7 +12,6 @@ request(url, function (error, response, body) {
     console.log('oops!, some error just happened.')
   }
   let books
-
   try {
     // 解析為 JavaScript 格式
     books = JSON.parse(body)

@@ -19,14 +19,17 @@ request({
     console.log(error)
     return
   }
-  if(response.statusCode >= 200 && response.statusCode < 400) {
+  if(response.statusCode >= 200 && response.statusCode < 300) {
     console.log('statusCode:', response.statusCode)
-    // 解析資料
-    const res = JSON.parse(body)
-    // 印出內容
-    res.data.forEach((item, index) => {
-      console.log(index + 1, item.name)
-    })
+    try {
+      // 解析資料
+      const { data } = JSON.parse(body)
+      // 印出內容
+      data.forEach((item, index) => console.log(index + 1, item.name))
+    } catch (error) {
+      console.log('出錯啦')
+      console.log(error)
+    }
   } else {
     console.log('請求失敗')
     console.log(JSON.parse(body))
