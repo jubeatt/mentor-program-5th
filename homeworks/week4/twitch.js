@@ -4,7 +4,7 @@ require('dotenv').config()
 const request = require('request')
 // API 網址
 const BASE_URL = 'https://api.twitch.tv/helix'
-// 一次的上限
+// 一次要抓的數量
 const BATCH_LIMIT = 100
 // 全部實況的數量
 const TOTAL_STREAMS = 200
@@ -50,6 +50,7 @@ function getStreams(gameId, first, after, callback) {
 function getAllStreams(gameId, limit, total, callback) {
   let streams = []
   // 用來處理部分實況資料的 handler
+  // 最後會回傳所有的實況資料
   function handlerStream(err, res, body) {
     // 取得時出現錯誤，就把錯誤帶回 callback
     if (err) {
@@ -57,17 +58,20 @@ function getAllStreams(gameId, limit, total, callback) {
     }
     // { data: [...], pagination: cursor: 'xxx'}
     const { data, pagination } = JSON.parse(body)
+    // 記憶這次 request 的終點位置（設為下一次的起點）
     const cursor = pagination.cursor
     // 成功的話，把資料拚回去
     streams = streams.concat(data)
     // 如果數量不夠，再抓一次
     if (streams.length < total) {
+      // 遞迴 handlerStream 來處理
       return getStreams(gameId, limit, cursor, handlerStream)
     }
     // 最後會拿到所有的實況資料
     callback(null, streams.slice(0, total))
   }
   // 第一次抓資料
+  // 第一次沒有記憶點，所以 after = null
   getStreams(gameId, limit, null, handlerStream)
 }
 
