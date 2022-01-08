@@ -4,27 +4,24 @@ const request = require('request');
 const { argv } = require('process')
 // API 網址
 const API_ENDPOINT = 'https://lidemy-book-store.herokuapp.com'
-// 動作
-const action = argv[2]
-// 書本 id or 書本名稱
-const params = argv[3]
-
+// 指令、檔案、動作、參數1、參數2
+const [command, file, action, params1, params2] = argv 
 
 switch (action) {
   case 'list':
     listBooks()
     break
   case 'read':
-    readBook(params)
+    readBook(params1)
     break
   case 'delete':
-    deleteBook(params)
+    deleteBook(params1)
     break
   case 'create':
-    createBook(params)
+    createBook(params1)
     break
   case 'update':
-    updateBook(params, argv[4])
+    updateBook(params1, params2)
     break
   default:
     console.log('Available command: list, read, delete, create and update')
