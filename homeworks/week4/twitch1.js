@@ -69,6 +69,7 @@ function handlerStreams(err, res, body) {
 }
 
 /*
+  node twitch1.js 'League of Legends'
   執行流程：
   1. 送出請求，取得遊戲 id => searchGame
   2. 拿到遊戲 id  => handlerGameId (callback)
