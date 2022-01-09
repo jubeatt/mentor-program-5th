@@ -101,9 +101,10 @@ function handlerSecondStreams(err, res, body) {
 
 
 /*
+  node twitch2.js 'League of Legends'
   執行流程：
   1. 發出請求，取得遊戲 id => searchGame
-  2. 拿到遊戲 id 後 => handlerGameId (callback)
+  2. 拿到遊戲 id => handlerGameId (callback)
   3. 利用遊戲 id 發出請求，取得第一筆實況列表 => getFirstStreams
   4. 拿到第一筆實況列表，把資料跟記憶點儲存起來 => handlerFirstStreams (callback)
   5. 發出請求，取得第二筆實況列表 => getSecondStreams
