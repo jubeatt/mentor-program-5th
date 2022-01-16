@@ -6,7 +6,7 @@
 
 - `<dl>` (description list) 代表一個「敘述清單」
 - `<dt>` (description title) 代表這個敘述清單的「標題」
-- `<dd>` (description desription) 代表這個敘述清單的「內容」
+- `<dd>` (description detail) 代表這個敘述清單的「內容」
 
 它的主要特色是有「自動縮排」的效果，所以早期會被拿來排版，但隨著 CSS 一天比一天還要強大，如今這個標籤好像也逐漸沒落了。
 
