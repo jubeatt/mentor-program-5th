@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+    <style>
+      /* 基本樣式 */
+      *,*::before, *::after {
+        box-sizing: border-box;
+      }
+      p {
+        font-size: 0.9em;
+      }
+
+
+      /* 共通樣式 */
+
+      [data-symbol="*"]::after{
+        content: attr(data-symbol);
+        color: #e74149;
+        margin-left: 0.3em;
+      }
+
+      .radio-block {
+        margin: 10px 0;
+      }
+      .btn-send {
+        padding: 10px 30px;
+        background-color: #fad312;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 30px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .btn-send:hover {
+        background-color: black;
+        color: white;
+      }
+      .hint-text {
+        color: #e74149;
+      }
+      .hide {
+        display: none;
+      }
+
+
+      /* 主樣式 */
+      .wrapper {
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 50px 20px;
+      }
+      .main {
+        max-width: 645px;
+        margin: auto;
+        background-color: white;
+        border-top: 8px solid#fad312;
+        box-shadow: 1.8px 2.4px 5px 0 rgb(0 0 0 / 30%);
+      }
+      .content {
+        padding: 40px 30px;
+      }
+      .header {
+        margin-bottom: 30px;
+      }
+      .header__title {
+        margin-bottom: 30px;
+      }
+      .header__list {
+        padding: 0;
+        margin: 0 0 20px;
+
+      }
+      .header__list-item {
+        list-style-type: none;
+        font-size: 0.9em;
+        padding: 5px 0;
+      }
+      .header__notice {
+        color: #e74149;
+        font-style: normal;
+      }
+      .input-block {
+        margin: 40px 0;
+      }
+      .input-block__title {
+        font-weight: normal;
+        font-size: 1.3em;
+        margin-bottom: 20px;
+      }
+      .input-block__input-box {
+        border: solid 1px #d0d0d0;
+        padding: 6px;
+      }
+      .input-block__input-box::-webkit-input-placeholder {
+        color: #aaa;
+      }
+      .input-block__input-box::-moz-placeholder {
+        color: #aaa;
+      }
+      .input-block__input-box:-ms-input-placeholder {
+        color: #aaa;
+      }
+      .input-block__input-box::-ms-input-placeholder {
+        color: #aaa;
+      }
+      .input-block__input-box::placeholder {
+        color: #aaa;
+      }
+      .copyright {
+        padding: 20px 0;
+        background-color: black;
+        text-align: center;
+        color: #999999;
+        font-size: 0.8em;
+      }
+    </style>
+    <title>表單</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <main class="main">
+        <div class="content">
+          <header class="header">
+            <h1 class="header__title">新拖延運動報名表單</h1>
+            <ul class="header__list">
+              <li class="header__list-item">活動日期：2020/12/10 ~ 2020/12/11</li>
+              <li class="header__list-item">活動地點：台北市大安區新生南路二段1號</li>
+            </ul>
+            <em class="header__notice">* 代表必填</em>
+          </header>
+          <form class="form" method="GET" action="">
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">暱稱</h2>
+              <input 
+                class="input-block__input-box"
+                type="text"
+                name="nickname"
+                placeholder="小明">
+              <p class="hint-text hide">請輸入內容</p>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">信箱</h2>
+              <input
+                class="input-block__input-box"
+                type="email"
+                name="email" 
+                placeholder="aaa@gmail.com">
+              <p class="hint-text hide">請輸入內容</p>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">手機號碼</h2>
+              <input 
+                class="input-block__input-box"
+                type="tel" 
+                name="tel" 
+                placeholder="0912345678">
+              <p class="hint-text hide">請輸入內容</p>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">報名類型</h2>
+              <div class="radio-block">
+                <input 
+                  class="radio-block__button"
+                  type="radio"
+                  name="type"
+                  id="type1" 
+                  value="躺在床上用想像力實作">
+                <label class="radio-block__text" for="type1">躺在床上用想像力實作</label>
+              </div>
+              <div class="radio-block">
+                <input
+                  class="radio-block__button"
+                  type="radio"
+                  name="type"
+                  id="type2"
+                  value="趴在地上滑手機找現成的">
+                <label class="radio-block__text" for="type2">趴在地上滑手機找現成的</label>
+              </div>
+              <p class="hint-text hide">請至少選擇一項</p>
+            </div>
+      
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">怎麼知道這個活動的？</h2>
+              <input
+                class="input-block__input-box"
+                type="text"
+                name="learn-from-where"
+                placeholder="Lidemy">
+              <p class="hint-text hide">請輸入內容</p>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title">其他</h2>
+              <p>對活動的一些建議</p>
+              <input
+                class="input-block__input-box"
+                type="text"
+                name="suggestion"
+                placeholder="高雄也可以舉辦一下">
+            </div>
+            <input class="btn-send" type="submit" value="提交">
+            <p>請勿透過表單送出您的密碼。</p>
+          </form>
+        </div>
+      </main>
+    </div>
+    <footer class="copyright">© 2020 © Copyright. All rights Reserved.</footer>
+
+    <script>
+      
+      // 清除所有空白節點
+      cleanJunkNodes(document)
+
+      // 表單驗證
+      document
+        .querySelector('.form')
+        .addEventListener('submit', function(e) {
+
+          e.preventDefault()
+          const emailFormat = /^\w+@[a-zA-Z]+\.com/
+          const telFormat = /^09\d{8}$/
+          const [
+            nickname,
+            email,
+            tel,
+            type1,
+            type2,
+            learFromWhere,
+            suggestion
+          ] = document.querySelectorAll('input')
+          let isValid = true
+
+          if (!nickname.value) {
+            isValid = false
+            nickname.nextSibling.classList.remove('hide')
+            nickname.focus()
+          } else {
+            nickname.nextSibling.classList.add('hide')
+          }
+
+          if (!email.value) {
+            isValid = false
+            email.nextSibling.classList.remove('hide')
+            email.focus()
+          } else if ( !(emailFormat.test(email.value)) ) {
+            isValid = false
+            email.nextSibling.classList.remove('hide')
+            email.nextSibling.innerText = '請輸入正確格式，例如：abc@gmail.com'
+            email.focus()
+          } else {
+            email.nextSibling.classList.add('hide')
+          }
+
+          if (!tel.value) {
+            isValid = false
+            tel.nextSibling.classList.remove('hide')
+            tel.focus()
+          } else if ( !(telFormat.test(tel.value)) ) {
+            isValid = false
+            tel.nextSibling.classList.remove('hide')
+            tel.nextSibling.innerText = '請輸入正確格式，例如：0912345678'
+            tel.focus()
+          } else {
+            tel.nextSibling.classList.add('hide')
+          }
+
+          if (!type1.checked && !type2.checked) {
+            isValid = false
+            document.querySelectorAll('.radio-block')[1]
+              .nextSibling.classList.remove('hide')
+          } else {
+            document.querySelectorAll('.radio-block')[1]
+              .nextSibling.classList.add('hide')
+          }
+
+          if (!learFromWhere.value) {
+            isValid = false
+            learFromWhere.nextSibling.classList.remove('hide')
+            learFromWhere.focus()
+          } else {
+            learFromWhere.nextSibling.classList.add('hide')
+          }
+
+
+          if (isValid) {
+            alert
+            (
+              `以下為您的輸入內容：` + '\n' +
+              `暱稱：${nickname.value}` + '\n' +
+              `信箱：${email.value}` + '\n' +
+              `手機號碼：${tel.value}` + '\n' +
+              `報名類型：${type1.checked ? '躺在床上用想像力實作' : '趴在地上滑手機找現成的' }` + '\n' +
+              `怎麼知道這個活動的：${learFromWhere.value}` + '\n' +
+              `其他：${suggestion.value ? suggestion.value : '無'}`
+            )
+          }
+
+        })
+
+        
+        /*
+        cleanJunkNodes 會接收一個節點：
+        1. 取得該節點下的所有子節點
+        2. 判斷子節點的值
+        3. 如果是沒用的節點就刪掉
+      */
+      function cleanJunkNodes (node) {
+        // 遍歷所有子節點
+        for (let i=0; i<node.childNodes.length; i++) {
+          // 存取第 i 個子節點
+          let child = node.childNodes[i]
+          // 如果是註解 or 文字節點（只有空白字元）
+          if 
+          (
+            child.nodeType === 8
+            || 
+            child.nodeType === 3 && !/\S/.test(child.nodeValue)
+          ) 
+          {
+            // 刪除子節點
+            node.removeChild(child)
+            // 往前退一格（因為長度變短了）
+            i--
+          }
+          else if (child.nodeType === 1) {
+            // 如果子節點是元素，遞迴 clean 清除垃圾節點
+            cleanJunkNodes(child)
+          }
+        }
+      }
+      
+
+    </script>
+  </body>
+</html>
