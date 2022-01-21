@@ -30,6 +30,10 @@ a {
   border-left: 15px solid #a3dea2;
   margin: 0;
 }
+.container {
+  max-width: 1280px;
+  margin: auto;
+}
 
 
 /* 導覽列 */
@@ -169,7 +173,7 @@ a {
 .testimonial {
   padding: 50px 15px;
 }
-.testimonial__wrap {
+.testimonial .container {
   margin-top: 100px;
 }
 .testimonial__content {
@@ -199,9 +203,7 @@ a {
 }
 
 @media screen and (min-width: 768px) {
-  .testimonial__wrap {
-    max-width: 1280px;
-    margin: 100px auto auto;
+  .testimonial .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     -moz-column-gap: 20px;
@@ -216,12 +218,6 @@ a {
 /* 地圖區塊 */
 .map {
   padding: 50px 15px;
-}
-@media screen and (min-width: 768px) {
-  .map__wrap {
-    max-width: 1280px;
-    margin: auto;
-  }
 }
 
 /* 頁腳區塊 */
@@ -247,11 +243,9 @@ a {
 }
 
 @media screen and (min-width: 768px) {
-  .footer__wrap {
+  .footer .container {
     display: flex;
     justify-content: space-between;
-    max-width: 1280px;
-    margin: auto;
   }
   .footer__header {
     order: 1;
