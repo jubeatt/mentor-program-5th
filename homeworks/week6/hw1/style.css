@@ -37,6 +37,9 @@ a {
 
 
 /* 導覽列 */
+.navigation {
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+}
 .navigation__site_name {
   font-size: 36px;
   color: #489846;
@@ -62,12 +65,10 @@ a {
   color: white;
 }
 @media screen and (min-width: 768px) {
-  .navigation {
+  .navigation .container {
     display: flex;
     align-items: center;
     padding: 5px 20px;
-    max-width: 1280px;
-    margin: auto;
   }
   .navigation__list {
     margin-left: auto;
