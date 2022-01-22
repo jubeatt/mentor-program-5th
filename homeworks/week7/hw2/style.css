@@ -88,8 +88,8 @@ a {
 .faq .container {
   max-width: 768px;
 }
-.faq__heading {
-  font-weight: normal;
+.faq__list {
+  counter-reset: order -1;
 }
 .faq__item {
   position: relative;
@@ -97,20 +97,26 @@ a {
   padding: 8px 0 4px 50px;
   font-weight: normal;
   cursor: pointer;
+  counter-increment: order;
 }
 .faq__item--hide  .faq__description {
   display: none;
 }
-.faq__description {
-  line-height: 1.4;
+.faq__heading {
+  font-weight: normal;
 }
-.faq__order {
+.faq__heading::before {
+  content: 'Q' counter(order) ':';
   position: absolute;
   top: 1em;
   left: 0;
   display: inline-block;
   font-size: 24px;
   color: #70b282;
+
+}
+.faq__description {
+  line-height: 1.4;
 }
 
 
