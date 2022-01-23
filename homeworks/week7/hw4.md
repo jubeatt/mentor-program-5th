@@ -149,7 +149,7 @@ window.addEventListener('click', function(e) {
 ![prevent-default-02](prevent-default-02.gif)
 
 
-不管 `window` 是在「冒泡」或「捕獲」觸發 `preventDefault`，同一條事件鏈上的元素都會被影響。
+`window` 故意設在「冒泡階段」觸發 `preventDefault`，但預設行為還是被阻止了。證明了只要在同一條事件鏈上，那所有元素都會被影響。
 
 
 
