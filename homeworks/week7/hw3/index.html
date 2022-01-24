@@ -82,6 +82,7 @@
      */
     renderTaskCount()
     setTime()
+
     // 任務列表
     const TASL_LIST = document.querySelector('.tasks') 
     // 輸入框
@@ -94,7 +95,7 @@
       setTaskCompleted: 把任務設為完成
       addTask: 新增任務
      */
-    TASL_LIST.addEventListener('click', deleteTask)
+    TASL_LIST.addEventListener('click', removeTask)
     TASL_LIST.addEventListener('click', setTaskCompleted)
     ADD_BUTTON.addEventListener('click', addTask)
     
@@ -114,11 +115,12 @@
         // 顯示 tooltip
         return document.querySelector('.tooltip').classList.remove('tooltip--hide')
       }
+      // 隱藏 tooltip
       document.querySelector('.tooltip').classList.add('tooltip--hide')
       // 建立任務元素
       const CONTENT = `
       <button class="tasks__check-button"></button>
-      <div class="tasks__name">${VALUE}</div>
+      <div class="tasks__name">${escapeHTML(VALUE)}</div>
       <button class="tasks__delete-button fas fa-trash-alt"></button>
       `
       const TASK = document.createElement('li')
@@ -134,11 +136,11 @@
     }
 
     // 刪除任務
-    function deleteTask(e) {
+    function removeTask(e) {
       const ELEMENT = e.target
       // 按下刪除按鈕才執行
       if (ELEMENT.classList.contains('tasks__delete-button')) {
-        TASL_LIST.removeChild(ELEMENT.closest('.tasks__item'))
+        ELEMENT.parentNode.remove()
       }
     }
 
@@ -182,6 +184,16 @@
         `${TIME.day[TODAY.getDay()]}, ` +
         `${TIME.month[TODAY.getMonth()]} ` +
         `${TODAY.getDate()}`
+    }
+
+    // 跳脫危險字元
+    function escapeHTML(unsafe) {
+      return unsafe
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/&/g, '&amp;')
+        .replace(/'/g, '&#039;')
+        .replace(/"/g, '&quot;')
     }
     </script>
 </body>
