@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="carousel.css">
+  <style>
+    /* 垂直居中 */
+    html, body {
+      height: 100%;
+    }
+    body {
+      display: flex;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <div class="carousel__container">
+      <div class="carousel__item">
+        <img src="https://i.picsum.photos/id/521/1200/800.jpg?hmac=weiMU8jL_i44xdNS3ljNbUBQPqeLIgKItdYV8AX6inM">
+      </div>
+      <div class="carousel__item">
+        <img src="https://i.picsum.photos/id/521/1200/800.jpg?hmac=weiMU8jL_i44xdNS3ljNbUBQPqeLIgKItdYV8AX6inM">
+      </div>
+      <div class="carousel__item">
+        <img src="https://i.picsum.photos/id/521/1200/800.jpg?hmac=weiMU8jL_i44xdNS3ljNbUBQPqeLIgKItdYV8AX6inM">
+      </div>
+    </div>
+    <div class="carousel__buttons-block"></div>
+    <button class="carousel__prev-button fas fa-chevron-left"></button>
+    <button class="carousel__next-button fas fa-chevron-right"></button>
+  </div>
+  <script src="./carousel.js"></script>
+  <script>
+    createCarousel({width: 0.8, height: 500, isLoop: false})
+  </script>
+</body>
+</html>
