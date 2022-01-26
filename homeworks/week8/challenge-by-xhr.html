@@ -8,27 +8,40 @@
   <style>
     html, body {
       height: 100%;
+      font-family: '微軟正黑體';
     }
     body {
       display: flex;
-      color: yellow;
+      color: white;
       font-size: 24px;
       margin: 0;
     }
+    .title {
+      position: absolute;
+      width: 100%;
+      color: #3A3A59;
+      text-align: center;
+      margin-top: -100px;
+    }
+    .counter {
+      color: #EF3F61;
+      padding: 0 0.5em;
+    }
     .wrap {
+      position: relative;
       width: min(80%, 1280px);
       margin: auto;
       display: flex;
     }
     .wrap__statistics {
       flex: 1;
-      background-color: black;
+      background-color: #2F89FC;
       border-radius: 8px;
     }
     .wrap__result {
       flex: 1;
       margin-left: 20px;
-      background-color: black;
+      background-color: #EF3F61;
       border-radius: 8px;
       position: relative;
     }
@@ -54,6 +67,7 @@
 
 
   <div class="wrap">
+    <h1 class="title">已抓取<span class="counter"></span>筆資料</h1>
     <div class="wrap__statistics">
       <div class="none">沒中獎數量：<span>0</span></div>
       <div class="first">頭獎數量：<span>0</span></div>
@@ -70,8 +84,10 @@
 
   <script>
 
+    // 計算目前抓幾筆
+    let dataCounter = 1
     // 總共要抓幾筆資料
-    const totalNumber = 100
+    const totalNumber = 200
     // 儲存拿到的結果 [0]=NONE，[1]=FIRST，....
     const counter = [0, 0, 0, 0, 0, 0]
     // DOM 元素
@@ -81,6 +97,7 @@
     const third = document.querySelector('.third')
     const errorElement = document.querySelector('.error')
     const fail = document.querySelector('.fail')
+    const counterElement = document.querySelector('.counter')
 
     // 開始計算
     lottery(totalNumber)
@@ -132,6 +149,8 @@
         // 遞迴
         lottery(total - 1)
       }
+      // 更新 DOM
+      counterElement.innerText = dataCounter++
       // 第一次發 request
       const request = new XMLHttpRequest()
       request.addEventListener('load', handlerPrize)

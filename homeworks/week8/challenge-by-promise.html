@@ -8,27 +8,40 @@
   <style>
     html, body {
       height: 100%;
+      font-family: '微軟正黑體';
     }
     body {
       display: flex;
-      color: yellow;
+      color: white;
       font-size: 24px;
       margin: 0;
     }
+    .title {
+      position: absolute;
+      width: 100%;
+      color: #3A3A59;
+      text-align: center;
+      margin-top: -100px;
+    }
+    .counter {
+      color: #EF3F61;
+      padding: 0 0.5em;
+    }
     .wrap {
+      position: relative;
       width: min(80%, 1280px);
       margin: auto;
       display: flex;
     }
     .wrap__statistics {
       flex: 1;
-      background-color: black;
+      background-color: #2F89FC;
       border-radius: 8px;
     }
     .wrap__result {
       flex: 1;
       margin-left: 20px;
-      background-color: black;
+      background-color: #EF3F61;
       border-radius: 8px;
       position: relative;
     }
@@ -53,7 +66,9 @@
 <body>
 
 
+  
   <div class="wrap">
+    <h1 class="title">已抓取<span class="counter"></span>筆資料</h1>
     <div class="wrap__statistics">
       <div class="none">沒中獎數量：<span>0</span></div>
       <div class="first">頭獎數量：<span>0</span></div>
@@ -71,7 +86,7 @@
   <script>
 
     // 總共要抓幾筆資料
-    const total = 500
+    const total = 200
     // 儲存拿到的結果 [0]=NONE，[1]=FIRST，....
     const counter = [0, 0, 0, 0, 0, 0]
     // DOM 元素
@@ -81,12 +96,15 @@
     const third = document.querySelector('.third')
     const errorElement = document.querySelector('.error')
     const fail = document.querySelector('.fail')
+    const counterElement = document.querySelector('.counter')
 
-    counting(total)
+    // counting(total)
 
     // 計算機率
     async function counting(n) {
       for (let i=0; i<n; i++) {
+        // 更新 DOM
+        counterElement.innerText = i+1
         const data = await fetch('https://dvwhnbka7d.execute-api.us-east-1.amazonaws.com/default/lottery')
         // 成功的處理
         try {
@@ -120,12 +138,12 @@
         接著在 x 100，取整數。  
       */
       const content = `
-          <div>沒中獎機率：${ ( (counter[0] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
-          <div>頭獎機率：${   ( (counter[1] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
-          <div>二獎機率：${   ( (counter[2] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
-          <div>三獎機率：${   ( (counter[3] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
-          <div>error 機率：${ ( (counter[4] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
-          <div>fail 機率：${  ( (counter[5] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>沒中獎機率：${ ( (counter[0] / total).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>頭獎機率：${   ( (counter[1] / total).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>二獎機率：${   ( (counter[2] / total).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>三獎機率：${   ( (counter[3] / total).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>error 機率：${ ( (counter[4] / total).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>fail 機率：${  ( (counter[5] / total).toFixed(2) * 100 ).toFixed(0) }%</div>
       `
       document.querySelector('.wrap__processing').remove()
       document.querySelector('.wrap__result').innerHTML = content
