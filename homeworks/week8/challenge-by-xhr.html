@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Probability</title>
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      display: flex;
+      color: yellow;
+      font-size: 24px;
+      margin: 0;
+    }
+    .wrap {
+      width: min(80%, 1280px);
+      margin: auto;
+      display: flex;
+    }
+    .wrap__statistics {
+      flex: 1;
+      background-color: black;
+      border-radius: 8px;
+    }
+    .wrap__result {
+      flex: 1;
+      margin-left: 20px;
+      background-color: black;
+      border-radius: 8px;
+      position: relative;
+    }
+    .wrap__processing {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 42px;
+      width: max-content;
+    }
+    .wrap div {
+      padding: 20px 10px;
+      text-align: center;
+    }
+    .wrap div ~ .wrap div {
+      border-top: 1px solid white;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <div class="wrap">
+    <div class="wrap__statistics">
+      <div class="none">沒中獎數量：<span>0</span></div>
+      <div class="first">頭獎數量：<span>0</span></div>
+      <div class="second">二獎數量：<span>0</span></div>
+      <div class="third">三獎數量：<span>0</span></div>
+      <div class="error">error 數量：<span>0</span></div>
+      <div class="fail">fail 數量：<span>0</span></div>
+    </div>
+    <div class="wrap__result">
+      <div class="wrap__processing">計算中...</div>
+    </div>
+    
+  </div>
+
+  <script>
+
+    // 總共要抓幾筆資料
+    const totalNumber = 100
+    // 儲存拿到的結果 [0]=NONE，[1]=FIRST，....
+    const counter = [0, 0, 0, 0, 0, 0]
+    // DOM 元素
+    const none = document.querySelector('.none')
+    const first = document.querySelector('.first')
+    const second = document.querySelector('.second')
+    const third = document.querySelector('.third')
+    const errorElement = document.querySelector('.error')
+    const fail = document.querySelector('.fail')
+
+    // 開始計算
+    lottery(totalNumber)
+
+    function lottery(total) {
+      // 停止遞迴
+      if (total <= 0)  {
+        /* 
+          計算結果
+          （中獎次數 / 總數），取小數第二位，
+          接著在 x 100，取整數。  
+        */
+        const content = `
+          <div>沒中獎機率：${ ( (counter[0] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>頭獎機率：${   ( (counter[1] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>二獎機率：${   ( (counter[2] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>三獎機率：${   ( (counter[3] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>error 機率：${ ( (counter[4] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
+          <div>fail 機率：${  ( (counter[5] / totalNumber).toFixed(2) * 100 ).toFixed(0) }%</div>
+        `
+        document.querySelector('.wrap__processing').remove()
+        document.querySelector('.wrap__result').innerHTML = content
+        return 0
+      }
+      // 處理回傳資料
+      function handlerPrize() {
+        if (request.status >= 200 && request.status < 400) {
+          const { prize, error=null } = JSON.parse(request.responseText)
+          if (error) {
+            addNumber(errorElement)
+          }
+          switch (prize) {
+            case 'NONE':
+              addNumber(none)
+              break
+            case 'FIRST':
+              addNumber(first)
+              break
+            case 'SECOND':
+              addNumber(second)
+              break
+            case 'THIRD':
+              addNumber(third)
+              break
+          }
+        } else {
+          addNumber(fail)
+        }
+        // 遞迴
+        lottery(total - 1)
+      }
+      // 第一次發 request
+      const request = new XMLHttpRequest()
+      request.addEventListener('load', handlerPrize)
+      request.open(
+        'GET',
+        'https://dvwhnbka7d.execute-api.us-east-1.amazonaws.com/default/lottery',
+        true
+      )
+      request.send()
+    }
+
+    // 更新 DOM 並更新計數器（抽到哪個就把哪個 +1）
+    function addNumber(node) {
+      if (node.classList.contains('none')) {
+        counter[0] = ++counter[0]
+      } else if (node.classList.contains('first')) {
+        counter[1] = ++counter[1]
+      } else if (node.classList.contains('second')) {
+        counter[2] = ++counter[2]
+      } else if (node.classList.contains('third')) {
+        counter[3] = ++counter[3]
+      } else if (node.classList.contains('error')) {
+        counter[4] = ++counter[4]
+      } else if (node.classList.contains('fail')) {
+        counter[5] = ++counter[5]
+      }
+      const child = node.querySelector('span')
+      child.innerText = Number(child.innerText) + 1
+    }
+
+  </script>
+  
+</body>
+</html>
