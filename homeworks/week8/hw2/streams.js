@@ -17,6 +17,7 @@ const navList = document.querySelector('.nav__list')
 const listItemElement = document.querySelectorAll('.nav__item')
 const streamsElement = document.querySelector('.streams')
 const topTitleElement = document.querySelector('.top__title')
+const showMoreButtonElement = document.querySelector('.button__show-more')
 
 
 
@@ -30,10 +31,14 @@ navList.addEventListener('click', function(e) {
   if (id) {
     // 開啟 loading 畫面
     $.LoadingOverlay("show")
+    /* 更新目前的遊戲 id */
+    currentGameId = target.getAttribute('data-game-id')
     /* 取得實況列表 */
     getStreams(id, function(err, response) {
       const usersId = []
       const json = JSON.parse(response)
+      // 更新分頁紀錄
+      paginationOfStreams = json.pagination.cursor
       const streams = json.data
       // 更新標題文字
       topTitleElement.innerText = streams[0].game_name
@@ -54,10 +59,49 @@ navList.addEventListener('click', function(e) {
   }
 })
 
+showMoreButtonElement.addEventListener('click', function() {
+  $.LoadingOverlay("show")
+  getMoreStreams(currentGameId, paginationOfStreams, function(err, response) {
+    let usersId = []
+    const json = JSON.parse(response)
+    // 更新分頁紀錄
+    paginationOfStreams = json.pagination.cursor
+    const streams = json.data
+    // 取得所有實況主資料
+    for (let stream of streams) {
+      usersId.push(stream.user_id)
+    }
+    /* 取得實況主資訊 */
+    getUser(usersId, function(err, response) {
+      const json = JSON.parse(response)
+      const users = json.data
+      // 渲染實況列表
+      renderStreams(streams, users)
+    })
+  })
+})
+
+function getMoreStreams(id, cursor, callback) {
+  const request = new XMLHttpRequest()
+  request.addEventListener('load', function() {
+    if (request.status >= 200 && request.status < 400) {
+      callback(null, request.responseText)
+    } else {
+      callback('error')
+    }
+  })
+  request.open('GET', `${BASE_URL}/streams?game_id=${id}&after=${cursor}`, true)
+  request.setRequestHeader('Client-ID', CLIENT_ID)
+  request.setRequestHeader('Authorization', ACCESS_TOKEN)
+  request.send()
+}
+
 
 // 第一次進入頁面
 init()
 
+let paginationOfStreams = null
+let currentGameId = null
 
 function init() {
   // 開啟 loading 畫面
@@ -68,6 +112,8 @@ function init() {
     const games = json.data
     // 設定標題文字
     topTitleElement.innerText = games[0].name
+    /* 取得目前的遊戲 id */
+    currentGameId = games[0].id
     // 設定按鈕資訊
     for(let i=0; i<listItemElement.length; i++) {
       const button = listItemElement[i].querySelector('.nav__button')
@@ -82,17 +128,16 @@ function init() {
       const usersId = []
       const json = JSON.parse(response)
       const streams = json.data
-      console.log('streams', streams)
+      paginationOfStreams = json.pagination.cursor
+      // console.log(paginationOfStreams)
       // 取出所有實況主 id
       for (let stream of streams) {
         usersId.push(stream.user_id)
       }
-      console.log('userID:', usersId)
       /* 取得實況主資訊 */
       getUser(usersId, function(err, response) {
         const json = JSON.parse(response)
         const users = json.data
-        console.log('response users', users)
         // 渲染實況列表
         renderStreams(streams, users)
       })
@@ -174,7 +219,6 @@ function getStreams(id, callback) {
 // 取得實況主資料
 function getUser(id, callback) {
   let queryString = id.join('&id=')
-  console.log('queryString', queryString)
   const request = new XMLHttpRequest()
   request.addEventListener('load', function() {
     callback(null, request.responseText)
@@ -184,13 +228,6 @@ function getUser(id, callback) {
   request.setRequestHeader('Authorization', ACCESS_TOKEN)
   request.send()
 }
-
-
-
-
-
-
-
 // 設定圖片尺寸 
 function setImageSize(url) {
   const regexp = /\{[a-zA-z]+\}x\{[a-zA-Z]+\}/
@@ -202,5 +239,4 @@ function removeAllChild(node) {
     node.removeChild(node.firstChild)
   }
 }
-
 

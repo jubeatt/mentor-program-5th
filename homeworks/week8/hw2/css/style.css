@@ -14,6 +14,20 @@ img {
   object-position: center;
 }
 
+.button__show-more {
+  display: block;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  margin: 60px auto 0 auto;
+  background-color: #FFD369;
+  color: #272727;
+  font-family: 'Russo One', sans-serif;
+  font-size: 20px;
+  /* font-weight: 500; */
+  border-radius: 4px;
+}
+
 
 @media (hover: hover) {
   .nav__button {
@@ -39,6 +53,12 @@ img {
   .card:hover .card__preview {
     -webkit-filter: brightness(1.2);
     filter: brightness(1.2);
+  }
+  .button__show-more {
+    transition: transform 0.2s;
+  }
+  .button__show-more:hover {
+    transform: scale(1.07);
   }
 }
 
