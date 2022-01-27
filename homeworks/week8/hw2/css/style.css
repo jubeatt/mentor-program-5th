@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Russo+One&display=swap');
 html, body {
   height: 100%;
 }
@@ -8,43 +8,58 @@ body {
 }
 img {
   vertical-align: middle;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
 }
+
 
 @media (hover: hover) {
   .nav__button {
     transition: color 0.2s, background-color 0.2s;
   }
   .nav__button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: #272727;
     color: white;
   }
   .card {
-    transition: transform 0.2s , opacity 0.2s , box-shadow 0.2s;
+    transition: transform 0.2s , box-shadow 0.2s;
     box-shadow: none;
-    opacity: 0.9;
   }
   .card:hover {
     transform: scale(1.07);
     box-shadow: 5px 5px 20px 5px rgb(0 0 0 / 50%);
-    opacity: 1;
+  }
+  .card__preview {
+    transition: -webkit-filter 0.2s;
+    transition: filter 0.2s;
+    transition: filter 0.2s, -webkit-filter 0.2s;
+  }
+  .card:hover .card__preview {
+    -webkit-filter: brightness(1.2);
+    filter: brightness(1.2);
   }
 }
+
+
 
 .nav {
   position: fixed;
   top: 0;
   width: 100%;
-  box-shadow: 1.4px 1.4px 6px 0 #97a2a0;
-  background-color: white;
+  background-color: #FFD369;
   z-index: 1;
 }
 .nav .container {
   width: 90%;
+  max-width: 1440px;
   margin: auto;
   display: flex;
   align-items: center;
 }
 .nav__logo {
+  font-family: 'Russo One', sans-serif;
   font-size: 32px;
   margin-right: 1em;
 }
@@ -58,6 +73,9 @@ img {
 .nav__button {
   display: block;
   padding: 22px 10px;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
 }
 .nav__open-button  {
   display: none;
@@ -68,6 +86,9 @@ img {
 
 /* mobile */
 @media screen and (max-width: 768px) {
+  .nav--open .nav__list{
+    transform: translateX(0);
+  }
   .nav {
     height: 60px;
   }
@@ -75,7 +96,6 @@ img {
     height: 100%;
   }
   .nav__list {
-    display: none;
     position: absolute;
     flex-direction: column;
     top: 0;
@@ -83,13 +103,11 @@ img {
     height: 100vh;
     background-color: #434343;
     color: white;
+    transform: translateX(100%);
+    transition: transform 0.3s;
   }
   .nav__item ~ .nav__item {
     margin-left: 0;
-  }
-  .nav__button  {
-    width: 100%;
-    text-align: center;
   }
   .nav__open-button  {
     display: block;
@@ -106,14 +124,12 @@ img {
 .main {
   padding: 60px 0 60px;
   min-height: 100%;
-  background-image: url(./bg.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-color: #272727;
   color: white;
 }
 .main .container {
   width: 90%;
-  max-width: 1280px;
+  max-width: 1440px;
   margin: auto;
 }
 .main .top {
@@ -122,13 +138,13 @@ img {
 }
 .main .top__title {
   font-size: 32px;
+  font-weight: 500;
   margin-bottom: 24px;
-  text-shadow: 0px 2px 3px rgba(150, 150, 150, 1);
 }
 .main .top__description {
   font-size: 24px;
+  font-weight: 500;
   margin-bottom: 24px;
-  text-shadow: 0px 2px 3px rgba(150, 150, 150, 1);
 }
 
 .streams {
@@ -136,7 +152,6 @@ img {
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  /* outline: 1px solid red; */
 }
 
 .card {
@@ -145,12 +160,7 @@ img {
 }
 .card__preview img {
   width: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
-  -o-object-position: center;
-  object-position: center;
 }
-
 .card__info {
   display: flex;
   padding: 6px;
@@ -158,17 +168,17 @@ img {
   background-color: #333;
 }
 .card__avatar {
+  flex-shrink: 0;
   width: 64px;
   height: 64px;
-  -o-object-fit: cover;
-  object-fit: cover;
-  -o-object-position: center;
-  object-position: center;
   border-radius: 50%;
   margin-right: 1em;
 }
+.card__detail {
+  width: 100%;
+  overflow: hidden;
+}
 .card__title {
-  max-width: 250px;
   font-size: 20px;
   white-space: nowrap;
   overflow: hidden;

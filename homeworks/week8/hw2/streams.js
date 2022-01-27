@@ -1,3 +1,13 @@
+/* loading 動畫 */
+$.LoadingOverlaySetup({
+  background: "rgba(0, 0, 0, 0.6)",
+  imageAnimation: false,
+  image: 'img/spinner.svg',
+  imageColor: '#FFD369',
+  size: '13'
+});
+
+
 // API token
 const CLIENT_ID = 'lg3ca106lmhdp9t5kx7fyfo7r60d43'
 const ACCESS_TOKEN= 'Bearer ow91p5ckfmdxj948g8kcv5quodt5id'
@@ -19,6 +29,7 @@ navList.addEventListener('click', function(e) {
   // 有 id 的按鈕
   const id = target.getAttribute('data-game-id')
   if (id) {
+    $.LoadingOverlay("show")
     /* 取得實況列表 */
     getStreams(id, function(response) {
       console.log(response)
@@ -37,6 +48,7 @@ navList.addEventListener('click', function(e) {
 
 
 function init() {
+  $.LoadingOverlay("show")
   /* 取得前五名熱門遊戲資料 */
   getTopFiveGames(function(response) {
     const { data } = response
@@ -69,7 +81,7 @@ function renderStreams(streamsList) {
       <img src="${setImageSize(streamsList[i].thumbnail_url, 800)}">
     </div>
     <div class="card__info">
-      <img class="card__avatar" src="./logo.png">
+      <img class="card__avatar" src="img/logo.png">
       <div class="card__detail">
         <div class="card__title">${streamsList[i].title}</div>
         <div class="card__anchor ">${streamsList[i].user_name}</div>
@@ -85,6 +97,7 @@ function renderStreams(streamsList) {
     // 插入父元素
     streams.append(card)
   }
+  $.LoadingOverlay("hide")
 }
 
 
@@ -132,3 +145,5 @@ function removeAllChild(node) {
     node.removeChild(node.firstChild)
   }
 }
+
+
