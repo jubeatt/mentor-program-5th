@@ -18,49 +18,39 @@ const streamsElement = document.querySelector('.streams')
 const topTitleElement = document.querySelector('.top__title')
 const showMoreButtonElement = document.querySelector('.button__show-more')
 const navButtonsElement = document.querySelectorAll('.nav__button')
+const mainElement = document.querySelector('.main')
+const detectorElement = document.querySelector('.detector')
+
 // API 相關參數
 const BATCH_LITMIT = 20
 // 分頁指標
 let pagination = 1
 // 目前的遊戲
 let currentGameName = ''
+// 避免連續觸發的 flag
+let isReload = true
+// 代表已經到最尾端的 flag
+let isLastPage = false
+
+
+
+
+
+
 
 // 切換實況列表
 navList.addEventListener('click', (e) => {
   const { target } = e
   if (target.classList.contains('nav__button')) {
+    const gameName = target.innerText
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
     })
-    const gameName = target.innerText
     // 重新載入
     reloadStreams(gameName)
     // 更新按鈕樣式
     document.querySelector('.nav__button--current').classList.remove('nav__button--current')
     target.classList.add('nav__button--current')
-  }
-})
-
-// 顯示更多
-showMoreButtonElement.addEventListener('click', async() => {
-  try {
-    $.LoadingOverlay('show')
-    // 搜尋實況列表
-    const streams = await getSteams(currentGameName, BATCH_LITMIT, BATCH_LITMIT * pagination)
-    // 更新分頁紀錄
-    pagination++
-    // 把新資料渲染出來
-    renderStreams(streams)
-    // 最後一頁了
-    if (pagination === 45) {
-      showMoreButtonElement.innerText = 'No more...'
-      showMoreButtonElement.classList.add('button__show-more--disabled')
-    }
-    $.LoadingOverlay('hide')
-  } catch (e) {
-    console.log('載入更多實況列表時出錯')
-    console.log(e)
   }
 })
 
@@ -86,6 +76,8 @@ async function init() {
   initNavigation(topFiveGames)
   // 渲染實況列表
   renderStreams(streams)
+  // 初始化無限滾動
+  initInfiniteScroll()
   $.LoadingOverlay('hide')
 }
 
@@ -104,14 +96,57 @@ async function reloadStreams(gameName) {
     removeAllChild(streamsElement)
     // 重新渲染實況列表
     renderStreams(streams)
-    // 初始化按鈕樣式與內容
-    showMoreButtonElement.innerText = 'Show more'
-    showMoreButtonElement.classList.remove('button__show-more--disabled')
+    // 移除提示訊息
+    if (document.querySelector('.no-more-hint')) {
+      document.querySelector('.no-more-hint').remove()
+    }
+    // 初始化無限滾動
+    if (isLastPage) {
+      initInfiniteScroll()
+      isLastPage = false
+    }
     $.LoadingOverlay('hide')
   } catch(e) {
     console.log('切換實況列表時出錯')
     console.log(e)
   }
+}
+
+// 無限滾動
+function initInfiniteScroll() {
+  
+  // 進入可視範圍的 callback
+  async function callback(entries) {
+    // 如果是進到可視範圍才更新
+    if (entries[0].isIntersecting && isReload) {
+      // 更新 flag
+      isReload = false
+      // 搜尋實況列表
+      const streams = await getSteams(currentGameName, BATCH_LITMIT, BATCH_LITMIT * pagination)
+      // 更新分頁紀錄
+      pagination++
+      // 把新資料渲染出來
+      renderStreams(streams)
+      // 渲染完再更新 flag
+      isReload = true
+      if (pagination === 3) {
+        // 更新 flag
+        isLastPage = true
+        const hintElement = document.createElement('div')
+        hintElement.classList.add('no-more-hint')
+        hintElement.innerText = 'No more...'
+        mainElement.appendChild(hintElement)
+        // 移除偵測元素
+        observer.unobserve(detectorElement)
+      }
+    }
+  }
+  // 設定偵測器
+  const observer = new IntersectionObserver(callback, {
+    threshold: 1
+  })
+  // 新增偵測元素
+  observer.observe(detectorElement)
 }
 
 // 初始化導覽列
@@ -206,3 +241,4 @@ function removeAllChild(node) {
     node.removeChild(node.firstChild)
   }
 }
+
