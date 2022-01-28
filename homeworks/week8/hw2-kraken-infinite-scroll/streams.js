@@ -129,7 +129,7 @@ function initInfiniteScroll() {
       renderStreams(streams)
       // 渲染完再更新 flag
       isReload = true
-      if (pagination === 3) {
+      if (pagination === 45) {
         // 更新 flag
         isLastPage = true
         const hintElement = document.createElement('div')
