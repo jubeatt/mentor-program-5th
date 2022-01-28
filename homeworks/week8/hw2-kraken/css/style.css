@@ -132,7 +132,7 @@ img {
     background-color: #434343;
     color: white;
     transform: translateX(100%);
-    /* transition: transform 0.3s; */
+    transition: transform 0.3s;
   }
   .nav__item ~ .nav__item {
     margin-left: 0;
