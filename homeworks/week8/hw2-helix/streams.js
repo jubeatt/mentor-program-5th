@@ -138,6 +138,8 @@ function init() {
       getUser(usersId, function(err, response) {
         const json = JSON.parse(response)
         const users = json.data
+      console.log(users)
+
         // 渲染實況列表
         renderStreams(streams, users)
       })
