@@ -34,10 +34,6 @@ let isLastPage = false
 
 
 
-
-
-
-
 // 切換實況列表
 navList.addEventListener('click', (e) => {
   const { target } = e
