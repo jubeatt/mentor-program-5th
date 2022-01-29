@@ -1,4 +1,4 @@
-/* loading 動畫 */
+//  loading 效果
 $.LoadingOverlaySetup({
   background: "rgba(0, 0, 0, 0.6)",
   imageAnimation: false,
@@ -12,6 +12,7 @@ $.LoadingOverlaySetup({
 const CLIENT_ID = 's44s145uexjgeu9mqqa1s93oc1bnli'
 const ACCEPT = 'application/vnd.twitchtv.v5+json'
 const BASE_URL = 'https://api.twitch.tv/kraken'
+
 // DOM 元素
 const navList = document.querySelector('.nav__list')
 const streamsElement = document.querySelector('.streams')
@@ -21,14 +22,14 @@ const navButtonsElement = document.querySelectorAll('.nav__button')
 const mainElement = document.querySelector('.main')
 const detectorElement = document.querySelector('.detector')
 
-// API 相關參數
+// 一次抓幾筆資料
 const BATCH_LITMIT = 20
 // 分頁指標
 let pagination = 1
 // 目前的遊戲
 let currentGameName = ''
-// 避免連續觸發的 flag
-let isReload = true
+// 避免連續觸發無限滾軸的 flag
+let isReloadCompleted = true
 // 代表已經到最尾端的 flag
 let isLastPage = false
 
@@ -96,9 +97,13 @@ async function reloadStreams(gameName) {
     if (document.querySelector('.no-more-hint')) {
       document.querySelector('.no-more-hint').remove()
     }
-    // 初始化無限滾動
+    /* 
+      要先檢查原本是不是最後一頁的狀態，如果是就代表偵測器已經被移除，
+      因此得重新建立無限滾動功能
+    */
     if (isLastPage) {
       initInfiniteScroll()
+      // 建立完後 flag 也要初始化
       isLastPage = false
     }
     $.LoadingOverlay('hide')
@@ -114,9 +119,9 @@ function initInfiniteScroll() {
   // 進入可視範圍的 callback
   async function callback(entries) {
     // 如果是進到可視範圍才更新
-    if (entries[0].isIntersecting && isReload) {
-      // 更新 flag
-      isReload = false
+    if (entries[0].isIntersecting && isReloadCompleted) {
+      // 更新 flag，在重新渲染完之前無法再次觸發
+      isReloadCompleted = false
       // 搜尋實況列表
       const streams = await getSteams(currentGameName, BATCH_LITMIT, BATCH_LITMIT * pagination)
       // 更新分頁紀錄
@@ -124,7 +129,8 @@ function initInfiniteScroll() {
       // 把新資料渲染出來
       renderStreams(streams)
       // 渲染完再更新 flag
-      isReload = true
+      isReloadCompleted = true
+      // 最後一頁了
       if (pagination === 45) {
         // 更新 flag
         isLastPage = true
@@ -139,7 +145,7 @@ function initInfiniteScroll() {
   }
   // 設定偵測器
   const observer = new IntersectionObserver(callback, {
-    threshold: 1
+    threshold: 0
   })
   // 新增偵測元素
   observer.observe(detectorElement)
@@ -220,7 +226,7 @@ async function getTopFiveGame() {
 async function getSteams(gameName, limit, offest) {
   let json = null
   const response = await fetch(
-    `${BASE_URL}/streams?game=${gameName}&limit=${limit}&offset=${offest}`, 
+    `${BASE_URL}/streams?game=${encodeURIComponent(gameName)}&limit=${limit}&offset=${offest}`, 
     {
       headers: {
         'Client-ID': CLIENT_ID,
@@ -234,7 +240,7 @@ async function getSteams(gameName, limit, offest) {
 // 刪除所有子元素
 function removeAllChild(node) {
   while (node.firstChild) {
-    node.removeChild(node.firstChild)
+    node.removeChild(node.lastChild)
   }
 }
 
