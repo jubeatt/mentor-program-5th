@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.0/css/all.min.css" integrity="sha512-eBNnVs5xPOVglLWDGXyZnZZ2K2ixXhR/3aECgCpFnW2dGCd/yiqXZ6fcB3BubeA91kM6NX234b6Wrah8RiYAPA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Twitch Live Games</title>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__logo">Twitch Top Games</div>
+      <ul class="nav__list">
+        <li class="nav__item">
+          <button class="nav__button nav__button--current">...</button>
+        </li>
+        <li class="nav__item">
+          <button class="nav__button">...</button>
+        </li>
+        <li class="nav__item">
+          <button class="nav__button">...</button>
+        </li>
+        <li class="nav__item">
+          <button class="nav__button">...</button>
+        </li>
+        <li class="nav__item">
+          <button class="nav__button">...</button>
+        </li>
+        <button class="nav__close-button fas fa-times"></button>
+      </ul>
+      <button class="nav__open-button fas fa-bars"></button>
+    </div>
+  </nav>
+
+
+  <main class="main">
+    <div class="container">
+      <div class="top">
+        <h1 class="top__title">Loading...</h1>
+        <p class="top__description">Top 20 popular live streams sorted by current viewers</p>
+      </div>
+      <section class="streams">
+        <!-- <a class="card" href="https://www.twitch.tv/muse_tw" target="_blank">
+          <div class="card__preview">
+            <img src="img/preview.jpg">
+          </div>
+          <div class="card__info">
+            <img class="card__avatar" src="./img/logo.png">
+            <div class="card__detail">
+              <div class="card__title">Title</div>
+              <div class="card__anchor ">user name</div>
+            </div>
+          </div>
+          <div class="card__viewer">
+            <i class="fas fa-eye"></i>
+            <span>1234</span>
+          </div>
+        </a> -->
+      </section>
+    </div>
+  </main>
+  <div class="detector"></div>
+
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- loading-overlay -->
+  <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+  <script src="./nav.js"></script>
+  <script src="./streams.js"></script>
+
+</body>
+</html>
