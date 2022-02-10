@@ -1,0 +1,182 @@
+body {
+  font-family: '微軟正黑體', sans-serif;
+  font-size: 16px;
+  background-color: #f7f7f7;
+}
+input:focus, textarea:focus {
+  outline-color: #7996ff;
+}
+
+.button {
+  width: 90px;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #c2dffb;
+}
+.button:hover {
+  background-color: #e4f0fb;
+}
+
+.warning {
+  background-color: #ffc4c6;
+  text-align: center;
+  color: #a20606;
+  font-weight: bold;
+  padding: 10px;
+  line-height: 1.5;
+}
+.error-msg {
+  font-weight: bold;
+  color: #a20606;
+  margin-bottom: 20px;
+}
+.login-please {
+  color: #a20606;
+  font-weight: bold;
+  text-align: center;
+}
+.greeting {
+  color: #5c9edc;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+.board {
+  background-color: white;
+  width: min(100%, 700px);
+  margin: 30px auto;
+  padding: 20px 30px;
+  box-shadow: 1px 1px 3px #e8e8e8;
+  border-radius: 6px;
+}
+.board__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.board__buttons > a {
+  display: inline-block;
+  line-height: 1.5;
+}
+.board__title {
+  font-size: 1.7em;
+  font-weight: 100;
+  margin-right: 0.5em;
+  color: #444;
+}
+.board__form .button {
+  display: block;
+  margin-left: auto;
+}
+.input-block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.input-block__label {
+  flex-shrink: 0;
+  margin-right: 1em;
+}
+.input-block__input,
+.input-block__textarea {
+  font-family: inherit;
+  width: 100%;
+  border: 1px solid #c2dffb;
+  padding: 4px 8px;
+  color: #7996ff;
+}
+.input-block__textarea {
+  min-height: 70px;
+  font-size: 16px;
+}
+.input-block__textarea::-webkit-input-placeholder, .input-block__input::-webkit-input-placeholder {
+  color: #7996ff;
+}
+.input-block__textarea::-moz-placeholder, .input-block__input::-moz-placeholder {
+  color: #7996ff;
+}
+.input-block__textarea:-ms-input-placeholder, .input-block__input:-ms-input-placeholder {
+  color: #7996ff;
+}
+.input-block__textarea::-ms-input-placeholder, .input-block__input::-ms-input-placeholder {
+  color: #7996ff;
+}
+.input-block__textarea::placeholder,
+.input-block__input::placeholder {
+  color: #7996ff;
+}
+
+.line-break {
+  margin: 40px 0;
+  height: 2px;
+  background-color: #ccc;
+}
+
+
+.card {
+  display: flex;
+  padding: 20px 0;
+}
+.card__avatar {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  background-color: #e4f0fb;
+  border-radius: 50%;
+  margin-right: 1em;
+}
+.card__content {
+  margin-right: 1em;
+}
+.card__info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.card__author {
+  color: #5c9edc;
+  max-width: 10em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+.card__time {
+  color: #a0a0a0;
+  font-size: 0.8em;
+}
+.card__time::before {
+  display: inline-block;
+  content: '‧';
+  margin: 0 0.5em;
+}
+.card__text {
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: pre-line;
+}
+.card__editor {
+  flex-shrink: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.card__editor button {
+  color: #5c9edc;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+}
+.card__editor button:hover {
+  color: #0083ff;
+}
+
+.card__editor button ~  button {
+  margin-left: 0.5em;
+  color: #ffc4c6;
+}
+
+.card__editor button ~  button:hover {
+  color: #ff9397;
+}
