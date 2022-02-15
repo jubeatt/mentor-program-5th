@@ -189,12 +189,12 @@
     // 跳脫危險字元
     function escapeHTML(unsafe) {
       return unsafe
+        .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/&/g, '&amp;')
         .replace(/'/g, '&#039;')
         .replace(/"/g, '&quot;')
-    }
+    }  
     </script>
 </body>
 
