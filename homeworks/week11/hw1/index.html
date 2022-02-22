@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留言板</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.6.0/css/all.min.css" integrity="sha512-ykRBEJhyZ+B/BIJcBuOyUoIxh0OfdICfHPnPfBy7eIiyJv536ojTCsgX8aqrLQ9VJZHGz4tvYyzOM0lkgmQZGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <header class="warning">注意！本站為練習用網站，因教學用途刻意忽略資安的實作，註冊時請勿使用任何真實的帳號或密碼。</header>
+
+
+  <main class="board">
+    <div class="board__header">
+      <div class="board__top">
+        <h1 class="board__title">Comments</h1>
+      </div>
+
+      <form class="board__form" method="POST">
+        <div class="input-block">
+          <label class="input-block__label" for="content">內容：</label>
+          <textarea class="input-block__textarea" name="content" id="content" placeholder="請輸入你的留言..."></textarea>
+        </div>
+          <button class="button">送出</button>
+      </form>
+    </div>
+
+    <div class="line-break"></div>
+
+
+    <div class="board__body"></div>
+
+
+    <div class="line-break"></div>
+
+    <div class="pagination">
+      <div class="pagination__status">
+      </div>
+      <div class="pagination__buttons-wrap">
+          <button class="pagination__button pagination__button--first">首頁</button>
+          <button class="pagination__button pagination__button--prev">上一頁</button>
+          <button class="pagination__button pagination__button--next">下一頁</button>
+          <button class="pagination__button pagination__button--last">最後一頁</button>
+      </div>
+    </div>
+  </main>
+
+
+  <script>
+
+    let page = 1;
+    const textarea = document.querySelector('textarea');
+    const board = document.querySelector('.board__body');
+    const form = document.querySelector('.board__form');
+    const buttons = document.querySelector('.pagination__buttons-wrap');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      addComment();
+    });
+
+
+    buttons.addEventListener('click', function(e) {
+      if (e.target.classList.contains('pagination__button--next')) {
+        page+=1;
+        return getComments (page, (err, comments) => {
+          removeAllChild(board);
+          renderComments(comments);
+        })
+      }
+      if (e.target.classList.contains('pagination__button--prev')) {
+        page-=1;
+        return getComments (page, (err, comments) => {
+          removeAllChild(board);
+          renderComments(comments);
+        })
+      }
+      if (e.target.classList.contains('pagination__button--first')) {
+        page=1;
+        return getComments (page, (err, comments) => {
+          removeAllChild(board);
+          renderComments(comments);
+        })
+      }
+      if (e.target.classList.contains('pagination__button--last')) {
+        page=4;
+        return getComments (page, (err, comments) => {
+          removeAllChild(board);
+          renderComments(comments);
+        })
+      }
+    })
+
+    getComments (page, (err, comments) => {
+      renderComments(comments);
+    })
+
+
+    function getComments (page=1, callback) {
+      const request = new XMLHttpRequest();
+      request.open('GET', `./api_get_comments.php?page=${page}`, true);
+      request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+          const { comments } = JSON.parse(request.responseText);
+          callback(null, comments);
+        } else {
+          callback('failed');
+        }
+      }
+      request.send();
+    }
+
+    
+    function renderComments (comments) {
+      for (const comment of comments) {
+        const div = document.createElement('div'); 
+        board.appendChild(div);
+        div.outerHTML = `
+        <div class="card">
+          <div class="card__avatar"></div>
+          <div class="card__content">
+            <div class="card__info">
+              <div class="card__author">${escapeHTML(comment.nickname)}</div>
+              <div class="card__time">${escapeHTML(comment.created_at)}</div>
+            </div>
+            <div class="card__username">${escapeHTML(comment.username)}</div>
+            <div class="card__text">${escapeHTML(comment.content)}</div>
+          </div>
+        </div>
+        `
+      }
+    }
+
+
+    function addComment () {
+      const input = textarea.value;
+      const formData = new FormData(form);
+      formData.append('username', 'peanu');
+
+      const request = new XMLHttpRequest();
+      request.open('POST', './api_add_comment.php', true);
+      request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+          const response = JSON.parse(request.responseText);
+          if (!response.ok) {
+            alert(response.messsage);
+          }
+          getComments (1, (err, comments) => {
+            removeAllChild(board);
+            textarea.value = '';
+            renderComments(comments);
+          })
+        }
+      }
+      request.send(formData);
+    }
+
+    function removeAllChild(node) {
+      while (node.firstChild) {
+        node.removeChild(node.lastChild);
+      }
+    }
+
+    function escapeHTML(unsafe) {
+      return unsafe
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/'/g, '&#039;')
+        .replace(/"/g, '&quot;')
+    }  
+
+
+  </script>
+</body>
+</html>
