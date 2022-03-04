@@ -1,0 +1,278 @@
+/* variables */
+$primary-green: #489846;
+$pink: #ff7286;
+$heading-color: #a3dea2;
+$footer-bg: #e8efee;
+$copyright-bg: #35564b;
+$btn-color: #3e613d;
+$btn-bg-green: #a8e8e1;
+$btn-bg-yellow: #f9f9b5;
+
+/* mixin */
+@mixin mediaQuery-pc {
+  @media screen and (min-width: 768px) {
+    @content
+  }
+}
+@mixin xy-center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+@mixin circle($width: 105px, $height: 105px) {
+  width: $width;
+  height: $height;
+  border-radius: 50%;
+}
+
+/* 基本樣式 */
+*,*::before,*::after {
+  box-sizing: border-box;
+}
+body {
+  font-size: 16px;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+/* 共通樣式 */
+
+.heading {
+  text-align: center;
+  margin-bottom: 40px;
+  &__text {
+    display: inline-block;
+    font-size: 36px;
+    font-weight: bold;
+    padding-left: 20px;
+    border-left: 15px solid $heading-color;
+    margin: 0;
+  }
+}
+.container {
+  max-width: 1280px;
+  margin: auto;
+}
+
+
+/* 導覽列 */
+.navigation {
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+  @include mediaQuery-pc {
+    .container {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+    }
+  }
+  &__site_name {
+    font-size: 36px;
+    color: $primary-green;
+    text-align: center;
+    padding: 15px 0;
+  }
+  &__list {
+    display: flex;
+    @include mediaQuery-pc {
+      margin-left: auto;
+    }
+  }
+  &__item {
+    width: 25%;
+    @include mediaQuery-pc {
+      & ~ & {
+        margin-left: 10px;
+      }
+    }
+  }
+  &__link {
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    padding: 12px 0;
+    transition: background-color 0.1s, color 0.1s;
+    @include mediaQuery-pc {
+      padding: 12px 20px;
+      border-radius: 8px;
+    }
+  }
+  &__link--active,
+  &__link:hover {
+    background-color: $pink;
+    color: white;
+  }
+}
+
+
+
+/* 橫幅圖片 */
+.banner {
+  display: flex;
+  height: 450px; 
+  background-image: url('../bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-color: rgba(0,0,0,0.4);
+  background-blend-mode: multiply;
+  &__title {
+    margin: auto;
+    color: white;
+    font-size: 60px;
+  }
+}
+
+
+/* 介紹區塊 */
+.intro {
+  padding: 50px 15px;
+  &__content {
+    margin-bottom: 30px;
+    @include mediaQuery-pc {
+      margin-bottom: 70px;
+    }
+  }
+  &__description {
+    line-height: 2;
+    text-align: center;
+  }
+  @include mediaQuery-pc {
+    &__buttons {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &__button{
+    display: block;
+    width: 300px;
+    border-radius: 10px;
+    padding: 60px;
+    text-align: center;
+    font-size: 36px;
+    color: $btn-color;
+    margin: auto;
+    transition: transform 0.1s;
+    @include mediaQuery-pc {
+      margin: 0;
+    }
+  }
+  &__button:hover {
+    transform: scale(1.1);
+  }
+  &__button--green {
+    background-color: $btn-bg-green;
+  }
+  &__button--yellow {
+    background-color: $btn-bg-yellow;
+  }
+  &__button:nth-child(2) {
+    margin-top: 20px;
+    @include mediaQuery-pc {
+      margin-top: 0;
+      margin-left: 25px;
+    }
+  }
+}
+
+
+
+/* 菜單區塊 */
+.menu {
+  padding: 50px 0;
+  @include mediaQuery-pc {
+    &__pictures {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  &__picture {
+    display: block;
+    width: 100%;
+  }
+}
+
+/* 評論區塊 */
+.testimonial {
+  padding: 50px 15px;
+  .container {
+    margin-top: 100px;
+    @include mediaQuery-pc {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      -moz-column-gap: 20px;
+      column-gap: 20px;
+    }
+  }
+  &__content {
+    position: relative;
+    border-radius: 4px;
+    line-height: 1.5;
+    border: 1px solid#c7e5ec;
+    box-shadow: -1.4px -1.4px 4px 0 #d8eaef;
+    padding: 60px 15px;
+    text-align: center;
+    & ~ & {
+      margin-top: 90px;
+      @include mediaQuery-pc {
+        margin-top: 0;
+      }
+    }
+  }
+  &__avatar {
+    @include circle;
+    @include xy-center;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: top;
+    object-position: top;
+  }
+}
+
+
+/* 地圖區塊 */
+.map {
+  padding: 50px 15px;
+}
+
+/* 頁腳區塊 */
+.footer {
+  @include mediaQuery-pc {
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  &__informations {
+    background-color: $footer-bg;
+    padding: 35px 45px;
+  }
+  &__header {
+    margin-bottom: 15px;
+    @include  mediaQuery-pc {
+      order: 1;
+      margin-left: 10px;
+    }
+  }
+  &__site_name {
+    font-size: 36px;
+    color: $primary-green;
+  }
+  &__detail_item ~ &__detail_item {
+    margin-top: 10px;
+  }
+  &__copyright {
+    padding: 12px;
+    color: white;
+    text-align: center;
+    background-color: $copyright-bg;
+  }
+}
