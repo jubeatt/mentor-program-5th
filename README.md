@@ -381,15 +381,15 @@
 
 #### 自我檢測
 
-- [ ] 你知道 webpack 的目的以及原理
-- [ ] 你熟悉如何使用 webpack 進行模組化開發
-- [ ] 你知道如何使用 Promise
-- [ ] 你知道如何使用 fetch
-- [ ] 你知道 gulp 的目的以及原理
-- [ ] 你知道 CSS Sprites 與 Data URI 的優缺點
-- [ ] 你知道什麼是 uglify 與 minify
-- [ ] 你熟悉如何使用 gulp 建構自動化工作流程
-- [ ] 你知道 CSS 優化的一些小技巧
+- [x] 你知道 webpack 的目的以及原理
+- [x] 你熟悉如何使用 webpack 進行模組化開發
+- [x] 你知道如何使用 Promise
+- [x] 你知道如何使用 fetch
+- [x] 你知道 gulp 的目的以及原理
+- [x] 你知道 CSS Sprites 與 Data URI 的優缺點
+- [x] 你知道什麼是 uglify 與 minify
+- [x] 你熟悉如何使用 gulp 建構自動化工作流程
+- [x] 你知道 CSS 優化的一些小技巧
 
 把答案寫在這裡：
 
