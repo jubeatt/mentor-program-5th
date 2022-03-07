@@ -9,7 +9,7 @@ $.LoadingOverlaySetup({
 
 const LIMIT = 20;
 const CLIENT_ID = 'lg3ca106lmhdp9t5kx7fyfo7r60d43';
-const ACCESS_TOKEN = 'Bearer ow91p5ckfmdxj948g8kcv5quodt5id';
+const ACCESS_TOKEN = 'Bearer f3a6vll2o851l8qy0eva5m5z1jzhmj';
 const API_ENDPOINT = 'https://api.twitch.tv/helix';
 const REQUEST_OPTIONS = {
   headers: {
