@@ -454,15 +454,15 @@
 
 #### 自我檢測
 
-- [ ] 你知道 Event Loop 的運作方式
-- [ ] 你知道什麼是作用域（Scope）
-- [ ] 你知道 Hoisting（提升）是什麼
-- [ ] 你知道 Hoisting 的原理為何
-- [ ] 你知道 Closure（閉包）是什麼
-- [ ] 你能夠舉出一個運用 Closure 的例子
-- [ ] 你知道 Prototype 在 JavaScript 裡是什麼
-- [ ] 你知道大部分情況下 this 的值是什麼
-- [ ] 你知道物件導向的基本概念（類別、實體、繼承、封裝）
+- [x] 你知道 Event Loop 的運作方式
+- [x] 你知道什麼是作用域（Scope）
+- [x] 你知道 Hoisting（提升）是什麼
+- [x] 你知道 Hoisting 的原理為何
+- [x] 你知道 Closure（閉包）是什麼
+- [x] 你能夠舉出一個運用 Closure 的例子
+- [x] 你知道 Prototype 在 JavaScript 裡是什麼
+- [x] 你知道大部分情況下 this 的值是什麼
+- [x] 你知道物件導向的基本概念（類別、實體、繼承、封裝）
 
 把答案寫在這裡：
 
