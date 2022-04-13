@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('components/head') %>
+</head>
+<body>
+
+  <%- include('components/nav') %>
+
+  <div class="banner banner--admin">
+    <h1 class="banner__title">新增獎項</h1>
+  </div>
+
+
+  <section class="draw">
+    <div class="container">
+
+      <form class="form" method="POST" action="/admin/draw/add-prize">
+        <% if (errorMessage && errorMessage.length) { %>
+          <div class="error-message"><%= errorMessage %></div>
+        <% } %>
+        <div class="form__input-block">
+          <div class="form__text">名稱</div>
+          <input class="form__input" type="text" name="name" placeholder="頭獎...">
+        </div>
+        <div class="form__input-block">
+          <div class="form__text">敘述</div>
+          <input class="form__input" type="text" name="description" placeholder="PlayStation 5 遊戲主機一台...">
+        </div>
+        <div class="form__input-block">
+          <div class="form__text">圖片</div>
+          <input class="form__input" type="text" name="image" placeholder="請輸入圖片網址">
+        </div>
+        <div class="form__input-block">
+          <div class="form__text">權重</div>
+          <input class="form__input" type="text" name="weight" placeholder="請輸入整數">
+        </div>
+        <button class="button">送出</button>
+      </form>
+    </div>
+      
+  </section>
+
+
+
+  <%- include('components/footer') %>
+</body>
+</html>

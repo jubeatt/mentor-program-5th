@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('components/head') %>
+</head>
+<body>
+
+  <%- include('components/nav') %>
+
+  <div class="banner banner--admin">
+    <h1 class="banner__title">公告訊息</h1>
+  </div>
+
+
+  <section class="draw">
+    <div class="container">
+
+      <form class="form" method="POST" action="/admin/draw/announcement">
+        <% if (errorMessage && errorMessage.length) { %>
+          <div class="error-message"><%= errorMessage %></div>
+        <% } %>
+        <div class="form__input-block">
+          <div class="form__text">標題</div>
+          <input class="form__input" type="text" name="title" value="<%= announcement.title %>">
+        </div>
+        <div class="form__input-block">
+          <div class="form__text">時間</div>
+          <input class="form__date" type="date" name="beginning" value="<%= new Date(announcement.beginning).toISOString().split('T')[0] %>">
+          <input class="form__date" type="date" name="expired" value="<%= new Date(announcement.expired).toISOString().split('T')[0] %>">
+        </div>
+        <div class="form__input-block">
+          <div class="form__text">說明</div>
+          <textarea class="form__input" type="text" name="description"><%= announcement.description %></textarea>
+        </div>
+        <div class="form__input-block">
+          <div class="form__text">獎品</div>
+          <textarea class="form__input" type="text" name="prize"><%= announcement.prize %></textarea>
+        </div>
+        <button class="button">送出</button>
+      </form>
+    </div>
+      
+  </section>
+
+
+
+  <%- include('components/footer') %>
+</body>
+</html>
