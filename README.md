@@ -543,14 +543,14 @@
 
 #### 自我檢測（二十二週）
 
-- [ ] 我熟悉 React 的基本使用
-- [ ] 我知道如何使用 React Router
-- [ ] 我了解 React Router 的目的
-- [ ] 我知道什麼是 Single Page Application
-- [ ] 我理解現在的前端與以往的差別
-- [ ] 我知道 class component 與 function component 的差異
-- [ ] 我知道 class component 的各個 lifecycle
-- [ ] 我知道每一個 hook 大概是在做什麼
+- [x] 我熟悉 React 的基本使用
+- [x] 我知道如何使用 React Router
+- [x] 我了解 React Router 的目的
+- [x] 我知道什麼是 Single Page Application
+- [x] 我理解現在的前端與以往的差別
+- [x] 我知道 class component 與 function component 的差異
+- [x] 我知道 class component 的各個 lifecycle
+- [x] 我知道每一個 hook 大概是在做什麼
 
 #### 自我檢測（二十三週）
 
