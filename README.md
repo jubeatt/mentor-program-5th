@@ -554,10 +554,10 @@
 
 #### 自我檢測（二十三週）
 
-- [ ] 我理解 Redux 的目的以及原理
-- [ ] 我理解 Redux 的資料流
-- [ ] 我理解 Redux 當中各種重要元素，像是：dispatch, store, action, reducer 等等
-- [ ] 我知道我們為什麼需要 Redux
+- [x] 我理解 Redux 的目的以及原理
+- [x] 我理解 Redux 的資料流
+- [x] 我理解 Redux 當中各種重要元素，像是：dispatch, store, action, reducer 等等
+- [x] 我知道我們為什麼需要 Redux
 
 #### 自我檢測（二十四週）
 
