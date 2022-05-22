@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Todo App</title>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar__info">
+          <div class="navbar__time"></div>
+          <div class="navbar__counter">5 Active Tasks</div>
+        </div>
+        <div class="navbar__tab">
+          <button class="navbar__tab-button navbar__tab-button--current">Incomplete Tasks</button>
+          <button class="navbar__tab-button">Completed Tasks</button>
+        </div>
+      </nav>
+      <div class="input-block">
+        <div class="tooltip tooltip--hide" data-tooltip="Please write someting">
+          <input class="input-block__input" type="text" placeholder="Enter a task...">
+        </div>
+        <button class="input-block__button">Add Task</button>
+      </div>
+      <button class="navbar__toggle-button fas fa-ellipsis-h"></button>
+    </header>
+
+    <div class="wrapper">
+      <ul class="tasks">
+        <li class="tasks__item">
+          <button class="tasks__check-button"></button>
+          <div class="tasks__name">JavaScript</div>
+          <button class="tasks__delete-button fas fa-trash-alt"></button>
+        </li>
+        <li class="tasks__item">
+          <button class="tasks__check-button"></button>
+          <div class="tasks__name">Prototype</div>
+          <button class="tasks__delete-button fas fa-trash-alt"></button>
+        </li>
+        <li class="tasks__item">
+          <button class="tasks__check-button"></button>
+          <div class="tasks__name">Hoisting</div>
+          <button class="tasks__delete-button fas fa-trash-alt"></button>
+        </li>
+        <li class="tasks__item">
+          <button class="tasks__check-button"></button>
+          <div class="tasks__name">Promise</div>
+          <button class="tasks__delete-button fas fa-trash-alt"></button>
+        </li>
+        <li class="tasks__item">
+          <button class="tasks__check-button"></button>
+          <div class="tasks__name">Async / Awiat</div>
+          <button class="tasks__delete-button fas fa-trash-alt"></button>
+        </li>
+        <li class="tasks__item">
+          <button class="tasks__check-button"></button>
+          <div class="tasks__name">Closure</div>
+          <button class="tasks__delete-button fas fa-trash-alt"></button>
+        </li>
+      </ul>
+    </div>
+    <div class="decoration">
+      <div class="decoration__circle"></div>
+      <div class="decoration__circle"></div>
+      <div class="decoration__circle"></div>
+    </div>
+  </div>
+
+
+  <script>
+    /*
+      Initialize
+      renderTaskCount: 取得任務數量
+      setTime: 取得目前時間
+     */
+    renderTaskCount()
+    setTime()
+
+    // 任務列表
+    const TASL_LIST = document.querySelector('.tasks') 
+    // 輸入框
+    const INPUT = document.querySelector('.input-block__input')
+    // 新增按鈕
+    const ADD_BUTTON = document.querySelector('.input-block__button')
+    /* 
+      主功能
+      deleteTask: 刪除任務
+      setTaskCompleted: 把任務設為完成
+      addTask: 新增任務
+     */
+    TASL_LIST.addEventListener('click', removeTask)
+    TASL_LIST.addEventListener('click', setTaskCompleted)
+    ADD_BUTTON.addEventListener('click', addTask)
+    
+    // 按下 Enter 鍵
+    INPUT.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        // = 按下按鈕
+        ADD_BUTTON.click()
+      }
+    })
+
+    // 新增任務
+    function addTask () {
+      // 輸入值
+      const VALUE = INPUT.value
+      if (!VALUE) {
+        // 顯示 tooltip
+        return document.querySelector('.tooltip').classList.remove('tooltip--hide')
+      }
+      // 隱藏 tooltip
+      document.querySelector('.tooltip').classList.add('tooltip--hide')
+      // 建立任務元素
+      const CONTENT = `
+      <button class="tasks__check-button"></button>
+      <div class="tasks__name">${escapeHTML(VALUE)}</div>
+      <button class="tasks__delete-button fas fa-trash-alt"></button>
+      `
+      const TASK = document.createElement('li')
+      TASK.classList.add('tasks__item')
+      TASK.innerHTML = CONTENT
+
+      // 插入父元素
+      TASL_LIST.appendChild(TASK)
+      // 清除內容
+      INPUT.value = ''
+      // 重新渲染任務數量
+      renderTaskCount()
+    }
+
+    // 刪除任務
+    function removeTask(e) {
+      const ELEMENT = e.target
+      // 按下刪除按鈕才執行
+      if (ELEMENT.classList.contains('tasks__delete-button')) {
+        ELEMENT.parentNode.remove()
+      }
+    }
+
+    // 設定任務完成
+    function setTaskCompleted(e) {
+      const ELEMENT = e.target
+      // 按下完成按鈕才執行
+      if (ELEMENT.classList.contains('tasks__check-button')) {
+        ELEMENT.classList.toggle('tasks__check-button--completed')
+      }
+    }
+
+    function renderTaskCount () {
+      const TOTAL = document.querySelectorAll('.tasks__item').length
+      const ELEMENT = document.querySelector('.navbar__counter')
+      ELEMENT.innerText = `${TOTAL} Active Tasks`
+
+    }
+
+    // 設定目前時間
+    function setTime() {
+      // mapping
+      const TIME = {
+        month: {
+          0: 'January', 1: 'February', 2: 'March',
+          3: 'April', 4: 'May', 5: 'June', 6: 'July',
+          7: 'August', 8: 'September', 9: 'Octorbor',
+          10: 'November', 11: 'December'
+        },
+        day: {
+          0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 
+          3: 'Wednesday', 4: 'Thursday', 5: 'Friday',
+          6: 'Saturday'
+        }
+      }
+      // 取得目前時間
+      const TODAY = new Date()
+      // 把時間寫到元素
+      const ELEMENT = document.querySelector('.navbar__time')
+      ELEMENT.innerText = 
+        `${TIME.day[TODAY.getDay()]}, ` +
+        `${TIME.month[TODAY.getMonth()]} ` +
+        `${TODAY.getDate()}`
+    }
+
+    // 跳脫危險字元
+    function escapeHTML(unsafe) {
+      return unsafe
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/'/g, '&#039;')
+        .replace(/"/g, '&quot;')
+    }  
+    </script>
+</body>
+
+
+</html>
