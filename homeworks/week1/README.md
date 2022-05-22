@@ -94,6 +94,8 @@ echo "檔案建立完成";
 
 ## 超級挑戰題
 
+如果之後想優化可以參考 [討論區](https://github.com/Lidemy/forum/discussions/50)
+
 請寫一個`github.sh`，可以傳入一個參數 username，執行之後就會輸出這個 GitHub 使用者的暱稱、介紹、地點跟個人網站。
 
 備註：這題禁止使用 jq 這個指令。
