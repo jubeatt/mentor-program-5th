@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>表單</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <main class="main">
+        <div class="content">
+          <header class="header">
+            <h1 class="header__title">新拖延運動報名表單</h1>
+            <ul class="header__list">
+              <li class="header__list-item">活動日期：2020/12/10 ~ 2020/12/11</li>
+              <li class="header__list-item">活動地點：台北市大安區新生南路二段1號</li>
+            </ul>
+            <em class="header__notice">* 代表必填</em>
+          </header>
+          <form class="form" method="GET" action="">
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">暱稱</h2>
+              <input 
+                class="input-block__input-box"
+                type="text"
+                name="nickname"
+                placeholder="小明" 
+                required>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">信箱</h2>
+              <input
+                class="input-block__input-box"
+                type="email"
+                name="email" 
+                placeholder="aaa@gmail.com"
+                required>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">手機號碼</h2>
+              <input 
+                class="input-block__input-box"
+                type="tel" 
+                name="tel" 
+                placeholder="0912345678"
+                required>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">報名類型</h2>
+              <div class="radio-block">
+                <input 
+                  class="radio-block__button"
+                  type="radio"
+                  name="type"
+                  id="type1" 
+                  value="躺在床上用想像力實作"
+                  required>
+                <label class="radio-block__text" for="type1">躺在床上用想像力實作</label>
+              </div>
+              <div class="radio-block">
+                <input
+                  class="radio-block__button"
+                  type="radio"
+                  name="type"
+                  id="type2"
+                  value="趴在地上滑手機找現成的"
+                  required>
+                <label class="radio-block__text" for="type2">趴在地上滑手機找現成的</label>
+              </div>
+            </div>
+      
+            <div class="input-block">
+              <h2 class="input-block__title" data-symbol="*">怎麼知道這個活動的？</h2>
+              <input
+                class="input-block__input-box"
+                type="text"
+                name="learn-from-where"
+                placeholder="Lidemy"
+                required>
+            </div>
+            <div class="input-block">
+              <h2 class="input-block__title">其他</h2>
+              <p>對活動的一些建議</p>
+              <input
+                class="input-block__input-box"
+                type="text"
+                name="suggestion"
+                placeholder="高雄也可以舉辦一下">
+            </div>
+            <input class="btn-send" type="submit" value="提交">
+            <p>請勿透過表單送出您的密碼。</p>
+          </form>
+        </div>
+      </main>
+    </div>
+    <footer class="copyright">© 2020 © Copyright. All rights Reserved.</footer>
+  </body>
+</html>
