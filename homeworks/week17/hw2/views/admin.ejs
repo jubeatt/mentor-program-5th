@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('components/head') %>
+</head>
+<body id="admin">
+
+  <%- include('components/nav') %>
+
+  <div class="banner banner--admin">
+    <h1 class="banner__title">管理後台</h1>
+  </div>
+
+
+  <section class="intro">
+    <div class="container">
+      <div class="intro__buttons">
+        <a class="intro__button intro__button--green" href="/admin/draw">管理抽獎</a>
+        <a class="intro__button intro__button--yellow" href="/admin/menu">管理菜單</a>
+        <a class="intro__button intro__button--pink" href="/admin/question">管理問題</a>
+      </div>
+    </div>
+  </section>
+
+
+  <%- include('components/footer') %>
+</body>
+</html>

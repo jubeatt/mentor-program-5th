@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('components/head') %>
+</head>
+<body id="login">
+
+  <%- include('components/nav') %>
+
+  <div class="banner">
+    <form class="form" method="POST" action="/login">
+      <% if (errorMessage && errorMessage.length) { %>
+        <div class="error-message"><%= errorMessage %></div>
+      <% } %>
+      <div class="form__input-block">
+        <div class="form__text">帳號</div>
+        <input class="form__input" type="text" name="username">
+      </div>
+      <div class="form__input-block">
+        <div class="form__text">密碼</div>
+        <input class="form__input" type="password" name="password">
+      </div>
+      <button class="button">送出</button>
+    </form>
+  </div>
+
+
+
+  <%- include('components/footer') %>
+
+</body>
+</html>

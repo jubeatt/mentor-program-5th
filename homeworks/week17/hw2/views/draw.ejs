@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('components/head') %>
+</head>
+<body id="draw">
+
+  <%- include('components/nav') %>
+
+  <div class="banner">
+    <div class="modal">
+      <div class="modal__title"><%= announcement.title %></div>
+      <div class="modal__content">
+        <div class="description-block">
+          <div class="description-block__heading">活動期間：</div>
+          <div class="description-block__detail"><%= `${new Date(announcement.beginning).toLocaleDateString(
+  undefined, {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+})} ~ ${new Date(announcement.expired).toLocaleDateString(
+  undefined, {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+})}` %></div>
+        </div>
+        <div class="description-block">
+          <div class="description-block__heading">活動說明：</div>
+          <div class="description-block__detail"><%= announcement.description %></div>
+        </div>
+        <div class="description-block">
+          <div class="description-block__heading">獎 品：</div>
+          <div class="description-block__detail"><%= announcement.prize %></div>
+        </div>
+      </div>
+      <button class="button">我要抽獎</button>
+    </div>
+  </div>
+
+
+
+  <%- include('components/footer') %>
+
+  <script>
+    
+    // DOM 元素
+    const banner = document.querySelector('.banner')
+    const modal = document.querySelector('.modal')
+
+    /*
+      根據案下的按鈕做處理
+      有 name 屬性的 button: 重新整理
+      沒有 name 屬性的 button: 抽獎
+    */
+    banner.addEventListener('click', function(e) {
+      const { target } = e
+      if (target.classList.contains('button') && target.hasAttribute('name')) {
+        // 重新整理目前頁面
+        document.location.replace(document.URL)
+      } else if (target.classList.contains('button')) {
+        draw()
+      }
+    })
+
+    // 抽獎！
+    async function draw () {
+      const res = await fetch('/api/draw')
+      const { name, description, imageUrl } = await res.json()
+      // 更改圖片設定值
+      banner.style.backgroundImage = `url(${imageUrl})`
+      // 建立新元素
+      const div = document.createElement('div')
+      // 加上 class
+      div.classList.add('result')
+      // 插入 HTML 內容
+      div.innerHTML = `
+        <div class="result__text">
+          <div class="result__item-name">恭喜你抽到：<span>${name}</span></div>
+          <div class="result__item--description">${description}</div>
+        </div>
+        <button class="button" name="refresh">再抽一次</button>
+      `
+      // 插回 banner
+      banner.appendChild(div)
+      // 隱藏互動視窗
+      modal.classList.add('hide')
+    }
+
+  </script>
+</body>
+</html>

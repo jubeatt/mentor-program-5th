@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>餐廳官網</title>
+</head>
+<body id="question">
+
+  <nav class="navigation">
+    <div class="container">
+      <div class="navigation__site_name"><a href="index.html">Just A Bite!</a></div>
+      <ul class="navigation__list">
+        <li class="navigation__item">
+          <a class="navigation__link" href="draw.html">抽個大獎</a>
+        </li>
+        <li class="navigation__item">
+          <a class="navigation__link" href="#">我要點餐</a>
+        </li>
+        <li class="navigation__item">
+          <a class="navigation__link" href="#">查詢訂單</a>
+        </li>
+        <li class="navigation__item">
+          <a class="navigation__link" href="question.html">常見問題</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <section class="faq">
+    <div class="container">
+      <div class="heading">
+        <h2 class="heading__text">FAQ - 常見問題</h2>
+      </div>
+      <ol class="faq__list">
+        <li class="faq__item faq__item--hide">
+          <h3 class="faq__heading">如何辦理退貨</h3>
+          <p class="faq__description">
+            線上刷卡的使用方式也超簡單，只要您確認您當次的購物清單與金額都無誤，就可立即到匯款上傳系統，登入個人帳號密碼後，點選"線上刷卡方式"，確認收件住址後，再進行刷卡確認程序即可～
+          </p>
+        </li>
+        <li class="faq__item faq__item--hide">
+          <h3 class="faq__heading">如何辦理退貨</h3>
+          <p class="faq__description">
+            線上刷卡的使用方式也超簡單，只要您確認您當次的購物清單與金額都無誤，就可立即到匯款上傳系統，登入個人帳號密碼後，點選"線上刷卡方式"，確認收件住址後，再進行刷卡確認程序即可～
+          </p>
+        </li>
+        <li class="faq__item faq__item--hide">
+          <h3 class="faq__heading">如何辦理退貨</h3>
+          <p class="faq__description">
+            線上刷卡的使用方式也超簡單，只要您確認您當次的購物清單與金額都無誤，就可立即到匯款上傳系統，登入個人帳號密碼後，點選"線上刷卡方式"，確認收件住址後，再進行刷卡確認程序即可～
+          </p>
+        </li>
+        <li class="faq__item faq__item--hide">
+          <h3 class="faq__heading">如何辦理退貨</h3>
+          <p class="faq__description">
+            線上刷卡的使用方式也超簡單，只要您確認您當次的購物清單與金額都無誤，就可立即到匯款上傳系統，登入個人帳號密碼後，點選"線上刷卡方式"，確認收件住址後，再進行刷卡確認程序即可～
+          </p>
+        </li>
+        <li class="faq__item faq__item--hide">
+          <h3 class="faq__heading">如何辦理退貨</h3>
+          <p class="faq__description">
+            線上刷卡的使用方式也超簡單，只要您確認您當次的購物清單與金額都無誤，就可立即到匯款上傳系統，登入個人帳號密碼後，點選"線上刷卡方式"，確認收件住址後，再進行刷卡確認程序即可～
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="footer__informations">
+      <div class="container">
+        <div class="footer__header">
+          <div class="footer__site_name">Just A Bite!</div>
+          <div class="footer__socail_media">Facebook / Instagram / YouTube</div>
+        </div>
+        <ul class="footer__detail_list">
+          <li class="footer__detail_item">餐館地址: 天上地下天堂路三分之一里六段520號</li>
+          <li class="footer__detail_item">訂位專線：02-1314-5566</li>
+          <li class="footer__detail_item">營業時間：週一〜週五 09:00~18:00 / 週六、週日、國定假日（含連假）休息</li>
+          <li class="footer__detail_item">email：service@justabite.com.tw</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      Copyright © 2020 Just A Bite All Rights Reserved. 咬一口股份有限公司版權所有
+    </div>
+  </footer>
+
+
+  <script>
+    
+      // DOM 內建方法
+      /* document.querySelector('.faq__list')
+        .addEventListener('click', function(e) {
+          e.target.closest('.faq__item').classList.toggle('faq__item--hide')
+        }) */
+
+      // 自己造輪子
+      document.querySelector('.faq__list')
+        .addEventListener('click', function(e) {
+          const element = closestRecursive(e.target, 'faq__item')
+          if (element) {
+            element.classList.toggle('faq__item--hide')
+          }
+        })
+
+      
+      // 迴圈法 
+      function closest(node, className) {
+        while (node && node.classList) {
+          if (node.classList.contains(className)) {
+            return node
+          }
+          node = node.parentNode
+        }
+      }
+      // 遞迴法 
+      function closestRecursive(node, className) {
+        if (!node || !node.classList) {
+          return null
+        }
+        if (node.classList.contains(className)) {
+          return node
+        }
+        return closestRecursive(node.parentNode, className)
+      }
+      
+
+  </script>
+</body>
+</html>

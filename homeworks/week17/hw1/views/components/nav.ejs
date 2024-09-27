@@ -1,0 +1,32 @@
+<nav class="navigation">
+  <div class="container">
+    <div class="navigation__site_name"><a href="/">Just A Bite!</a></div>
+    <button class="navigation__button"><i class="fas fa-bars"></i></button>
+    <ul class="navigation__list" data-state="close">
+      <li class="navigation__item">
+        <a class="navigation__link" href="/draw">抽個大獎</a>
+      </li>
+      <li class="navigation__item">
+        <a class="navigation__link" href="#">我要點餐</a>
+      </li>
+      <li class="navigation__item">
+        <a class="navigation__link" href="#">查詢訂單</a>
+      </li>
+      <li class="navigation__item">
+        <a class="navigation__link" href="/question">常見問題</a>
+      </li>
+      <% if (username) { %>
+        <li class="navigation__item">
+          <a class="navigation__link" href="/admin">後台管理</a>
+        </li>
+        <li class="navigation__item">
+          <a class="navigation__link" href="/logout">登出</a>
+        </li>
+      <% } else { %>
+        <li class="navigation__item">
+          <a class="navigation__link" href="/login">登入</a>
+        </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

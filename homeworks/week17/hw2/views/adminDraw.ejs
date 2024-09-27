@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('components/head') %>
+</head>
+<body>
+
+  <%- include('components/nav') %>
+
+  <div class="banner banner--admin">
+    <h1 class="banner__title">管理抽獎</h1>
+  </div>
+
+
+  <section class="draw">
+    <div class="container">
+
+
+      <div class="intro__buttons">
+        <a class="intro__button intro__button--green" href="/admin/draw/announcement">公告訊息</a>
+        <a class="intro__button intro__button--yellow" href="/admin/draw/add-prize">新增獎項</a>
+      </div>
+
+
+      <div class="prizes">
+        <% prizes.forEach((prize, index) => { %>
+          <div class="prize">
+            <div class="prize__number"><%= index+1 %></div>
+            <div class="prize__image">
+              <img src="<%= prize.imageUrl %>">
+            </div>
+            <div class="prize__name"><%= prize.description %></div>
+            <div class="prize__buttons">
+              <a href="/admin/draw/update-prize?id=<%= prize.id %>" class="edit-button">編輯</a>
+              <a href="/admin/draw/delete-prize?id=<%= prize.id %>" class="delete-button">刪除</a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+      
+
+
+
+  </section>
+
+  <%- include('components/footer') %>
+</body>
+</html>
